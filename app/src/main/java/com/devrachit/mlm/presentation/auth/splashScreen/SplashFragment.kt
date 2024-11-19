@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.devrachit.mlm.utility.theme.MlmTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 //import com.devrachit.mlm.utility.theme.MlmTheme
@@ -29,11 +30,9 @@ class SplashFragment:Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.Red)
-                )
+                MlmTheme {
+                    SplashScreen()
+                }
             }
         }
     }

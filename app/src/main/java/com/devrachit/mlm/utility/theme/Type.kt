@@ -10,6 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
 import com.devrachit.mlm.R
+import com.devrachit.mlm.utility.composeUtility.ssp
 
 
 val Typography = Typography(
@@ -28,260 +29,260 @@ val DefaultTextStyle = TextStyle(
 @Composable
 fun TextStyleInter12Lh16Fw400(): TextStyle {
     return DefaultTextStyle.copy(
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
+        fontSize = 12.ssp,
+        lineHeight = 16.ssp,
         fontFamily = FontFamily(Font(R.font.inter_regular_400)),
         fontWeight = FontWeight(400),
     )
 }
-//
-//@Composable
-//fun TextStyleInter12Lh16Fw500(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 12.ssp,
-//        lineHeight = 16.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
-//        fontWeight = FontWeight(500),
-//    )
-//}
-//@Composable
-//fun TextStyleInter12Lh16Fw600(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 12.ssp,
-//        lineHeight = 16.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
-//        fontWeight = FontWeight(600),
-//    )
-//}
-//@Composable
-//fun TextStyleInter12Lh16Fw700(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 12.ssp,
-//        lineHeight = 16.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_bold_700)),
-//        fontWeight = FontWeight(700),
-//    )
-//}
-//@Composable
-//fun TextStyleInter10Lh12Fw400(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 10.ssp,
-//        lineHeight = 12.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
-//        fontWeight = FontWeight(400),
-//    )
-//}
-//@Composable
-//fun TextStyleInter10Lh12Fw500(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 10.ssp,
-//        lineHeight = 12.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
-//        fontWeight = FontWeight(500),
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter14Lh18Fw500(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 18.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
-//        fontWeight = FontWeight(500)
-//    )
-//}
-//@Composable
-//fun TextStyleInter14Lh16Fw500(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 16.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
-//        fontWeight = FontWeight(500)
-//    )
-//}
-//@Composable
-//fun TextStyleInter14Lh18Fw600(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 18.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
-//        fontWeight = FontWeight(600)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter14Lh16Fw400(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 16.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
-//        fontWeight = FontWeight(400)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter14Lh16Fw600(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 16.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
-//        fontWeight = FontWeight(600)
-//    )
-//}
-//@Composable
-//fun TextStyleInter14Lh18Fw400(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 18.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
-//        fontWeight = FontWeight(400)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter14Lh24Fw400(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
-//        fontWeight = FontWeight(400),
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter14Lh24Fw500(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
-//        fontWeight = FontWeight(500)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter14Lh24Fw600(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
-//        fontWeight = FontWeight(600)
-//    )
-//}
-//@Composable
-//fun TextStyleInter14Lh24Fw700(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_bold_700)),
-//        fontWeight = FontWeight(700)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter16Lh24Fw400(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 16.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
-//        fontWeight = FontWeight(400)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter16Lh24Fw500(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 16.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
-//        fontWeight = FontWeight(500)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter16Lh24Fw600(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 16.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
-//        fontWeight = FontWeight(600)
-//    )
-//}
-//@Composable
-//fun TextStyleInter16Lh28Fw600(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 16.ssp,
-//        lineHeight = 28.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
-//        fontWeight = FontWeight(600)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter16Lh24Fw700(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 16.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_bold_700)),
-//        fontWeight = FontWeight(700)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter14Lh20Fw400(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 20.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
-//        fontWeight = FontWeight(400)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter14Lh20Fw500(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 20.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
-//        fontWeight = FontWeight(500)
-//    )
-//}
-//@Composable
-//fun TextStyleInter14Lh20Fw600(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 14.ssp,
-//        lineHeight = 20.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
-//        fontWeight = FontWeight(600)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter18Lh24Fw700(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 18.ssp,
-//        lineHeight = 24.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_bold_700)),
-//        fontWeight = FontWeight(700)
-//    )
-//}
-//
-//@Composable
-//fun TextStyleInter24Lh36Fw600(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 24.ssp,
-//        lineHeight = 36.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
-//        fontWeight = FontWeight(600)
-//    )
-//}
-//
-//
-//@Composable
-//fun TextStyleInter24Lh36Fw700(): TextStyle {
-//    return DefaultTextStyle.copy(
-//        fontSize = 24.ssp,
-//        lineHeight = 36.ssp,
-//        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
-//        fontWeight = FontWeight(700)
-//    )
-//}
+
+@Composable
+fun TextStyleInter12Lh16Fw500(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 12.ssp,
+        lineHeight = 16.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
+        fontWeight = FontWeight(500),
+    )
+}
+@Composable
+fun TextStyleInter12Lh16Fw600(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 12.ssp,
+        lineHeight = 16.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
+        fontWeight = FontWeight(600),
+    )
+}
+@Composable
+fun TextStyleInter12Lh16Fw700(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 12.ssp,
+        lineHeight = 16.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_bold_700)),
+        fontWeight = FontWeight(700),
+    )
+}
+@Composable
+fun TextStyleInter10Lh12Fw400(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 10.ssp,
+        lineHeight = 12.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
+        fontWeight = FontWeight(400),
+    )
+}
+@Composable
+fun TextStyleInter10Lh12Fw500(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 10.ssp,
+        lineHeight = 12.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
+        fontWeight = FontWeight(500),
+    )
+}
+
+@Composable
+fun TextStyleInter14Lh18Fw500(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 18.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
+        fontWeight = FontWeight(500)
+    )
+}
+@Composable
+fun TextStyleInter14Lh16Fw500(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 16.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
+        fontWeight = FontWeight(500)
+    )
+}
+@Composable
+fun TextStyleInter14Lh18Fw600(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 18.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
+        fontWeight = FontWeight(600)
+    )
+}
+
+@Composable
+fun TextStyleInter14Lh16Fw400(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 16.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
+        fontWeight = FontWeight(400)
+    )
+}
+
+@Composable
+fun TextStyleInter14Lh16Fw600(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 16.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
+        fontWeight = FontWeight(600)
+    )
+}
+@Composable
+fun TextStyleInter14Lh18Fw400(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 18.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
+        fontWeight = FontWeight(400)
+    )
+}
+
+@Composable
+fun TextStyleInter14Lh24Fw400(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
+        fontWeight = FontWeight(400),
+    )
+}
+
+@Composable
+fun TextStyleInter14Lh24Fw500(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
+        fontWeight = FontWeight(500)
+    )
+}
+
+@Composable
+fun TextStyleInter14Lh24Fw600(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
+        fontWeight = FontWeight(600)
+    )
+}
+@Composable
+fun TextStyleInter14Lh24Fw700(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_bold_700)),
+        fontWeight = FontWeight(700)
+    )
+}
+
+@Composable
+fun TextStyleInter16Lh24Fw400(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 16.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
+        fontWeight = FontWeight(400)
+    )
+}
+
+@Composable
+fun TextStyleInter16Lh24Fw500(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 16.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
+        fontWeight = FontWeight(500)
+    )
+}
+
+@Composable
+fun TextStyleInter16Lh24Fw600(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 16.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
+        fontWeight = FontWeight(600)
+    )
+}
+@Composable
+fun TextStyleInter16Lh28Fw600(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 16.ssp,
+        lineHeight = 28.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
+        fontWeight = FontWeight(600)
+    )
+}
+
+@Composable
+fun TextStyleInter16Lh24Fw700(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 16.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_bold_700)),
+        fontWeight = FontWeight(700)
+    )
+}
+
+@Composable
+fun TextStyleInter14Lh20Fw400(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 20.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_regular_400)),
+        fontWeight = FontWeight(400)
+    )
+}
+
+@Composable
+fun TextStyleInter14Lh20Fw500(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 20.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_medium_500)),
+        fontWeight = FontWeight(500)
+    )
+}
+@Composable
+fun TextStyleInter14Lh20Fw600(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 14.ssp,
+        lineHeight = 20.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
+        fontWeight = FontWeight(600)
+    )
+}
+
+@Composable
+fun TextStyleInter18Lh24Fw700(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 18.ssp,
+        lineHeight = 24.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_bold_700)),
+        fontWeight = FontWeight(700)
+    )
+}
+
+@Composable
+fun TextStyleInter24Lh36Fw600(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 24.ssp,
+        lineHeight = 36.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
+        fontWeight = FontWeight(600)
+    )
+}
+
+
+@Composable
+fun TextStyleInter24Lh36Fw700(): TextStyle {
+    return DefaultTextStyle.copy(
+        fontSize = 24.ssp,
+        lineHeight = 36.ssp,
+        fontFamily = FontFamily(Font(R.font.inter_semi_bold_600)),
+        fontWeight = FontWeight(700)
+    )
+}
