@@ -13,6 +13,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import com.devrachit.mlm.R
 import com.devrachit.mlm.utility.theme.MlmTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,9 +31,17 @@ class SplashFragment:Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            val navController = findNavController()
             setContent {
                 MlmTheme {
-                    SplashScreen()
+                    SplashScreen(
+                        onLoginClick = {
+                            navController.navigate(R.id.action_splashFragment_to_loginFragment)
+                        },
+                        onSignUpClick = {
+                            navController.navigate(R.id.action_splashFragment_to_signupFragment)
+                        }
+                    )
                 }
             }
         }

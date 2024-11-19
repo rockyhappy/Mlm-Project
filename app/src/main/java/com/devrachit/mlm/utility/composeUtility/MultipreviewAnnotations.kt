@@ -10,6 +10,21 @@ import androidx.compose.ui.tooling.preview.Preview
     device = "spec:width=360dp,height=640dp,dpi=480"
 )
 @Preview(
+    name = "phone_small",
+    group = "devices",
+    device = "spec:width=320dp,height=480dp,dpi=320"
+)
+@Preview(
+    name = "phone_medium",
+    group = "devices",
+    device = "spec:width=360dp,height=640dp,dpi=480"
+)
+@Preview(
+    name = "phone_large",
+    group = "devices",
+    device = "spec:width=400dp,height=800dp,dpi=480"
+)
+@Preview(
     name = "tablet",
     group = "devices",
     device = "spec:width=800dp,height=1280dp,dpi=480"
