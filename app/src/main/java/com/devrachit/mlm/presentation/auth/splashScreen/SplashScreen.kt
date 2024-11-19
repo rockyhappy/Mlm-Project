@@ -26,6 +26,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import com.devrachit.mlm.R
 import com.devrachit.mlm.utility.composeUtility.CompletePreviews
+import com.devrachit.mlm.utility.composeUtility.OrientationPreviews
 import com.devrachit.mlm.utility.composeUtility.sdp
 import com.devrachit.mlm.utility.composeUtility.ssp
 import com.devrachit.mlm.utility.theme.TextStyleInter12Lh16Fw600
@@ -35,15 +36,13 @@ import com.devrachit.mlm.utility.theme.TextStyleInter18Lh24Fw700
 
 
 @Composable
-fun SplashScreen(
+fun SplashScreenPortrait(
     onLoginClick: () -> Unit = {},
     onSignUpClick: () -> Unit = {}
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .systemBarsPadding()
             .background(colorResource(id = R.color.surface_card_normal_default)),
         horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
         verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
@@ -139,8 +138,119 @@ fun SplashScreen(
 
 }
 
+@Composable
+fun SplashScreenLandscape(
+    onLoginClick: () -> Unit = {},
+    onSignUpClick: () -> Unit = {}
+)
+{
+
+    Row(
+        modifier=Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.surface_card_normal_default)),
+        horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceEvenly,
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+    )
+    {
+        Box(
+            modifier = Modifier
+                .padding(top = 50.sdp)
+                .weight(0.5f)
+                .padding(start = 22.sdp, end = 22.sdp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.filler_person1),
+                modifier = Modifier.fillMaxSize(),
+                contentDescription = "Splash Screen Image"
+            )
+        }
+        Column(
+            modifier = Modifier
+                .weight(0.6f)
+                .fillMaxSize()
+                .padding(start = 22.sdp, end = 22.sdp),
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+            verticalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceEvenly
+
+        )
+        {
+            Text(
+                text = "Your Own Personalized \n Advertisement Creator",
+                color = colorResource(id = R.color.primary_color),
+                fontSize = 24.ssp,
+                fontFamily = TextStyleInter18Lh24Fw700().fontFamily,
+                fontWeight = TextStyleInter18Lh24Fw700().fontWeight,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                maxLines = 2,
+                lineHeight = 28.ssp,
+                modifier = Modifier
+
+            )
+            Text(
+                text = "Create your own personalized advertisement \n in just a few clicks",
+                color = colorResource(id = R.color.content_neutral_primary_black),
+                style= TextStyleInter14Lh16Fw400(),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                maxLines = 2,
+                modifier = Modifier
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceAround
+            )
+            {
+                Button(
+                    onClick = onLoginClick,
+                    modifier= Modifier
+                        .height(50.sdp)
+                        .width(130.sdp),
+                    colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.primary_color),
+                        disabledContainerColor = colorResource(id = R.color.surface_card_normal_default),
+                    ),
+                    shape = RoundedCornerShape(10.sdp)
+                ) {
+                    Text(
+                        text = "Login",
+                        color = colorResource(id = R.color.extra_blue_0),
+                        style= TextStyleInter16Lh24Fw600()
+                    )
+                }
+                Button(
+                    onClick = onSignUpClick,
+                    modifier= Modifier
+                        .height(50.sdp)
+                        .width(130.sdp)
+                        ,
+                    colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        disabledContainerColor = colorResource(id = R.color.surface_card_normal_default),
+                    ),
+                    shape = RoundedCornerShape(10.sdp)
+                ) {
+                    Text(
+                        text = "Sign Up",
+                        color = colorResource(id = R.color.content_neutral_primary_black),
+                        style= TextStyleInter16Lh24Fw600()
+                    )
+                }
+            }
+        }
+
+    }
+
+}
+
 @CompletePreviews
 @Composable
 fun SplashScreenPreview() {
-    SplashScreen()
+    SplashScreenPortrait()
+}
+
+@OrientationPreviews
+@Composable
+fun SplashScreenLandscapePreview() {
+    SplashScreenLandscape()
 }

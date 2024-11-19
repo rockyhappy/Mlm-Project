@@ -46,6 +46,37 @@ annotation class DevicePreviews
 annotation class ThemesPreview
 
 
+@Preview(
+    name = "landscape_phone_small",
+    group = "orientation",
+    widthDp = 480,
+    heightDp = 320,
+    showBackground = true
+)
+
+@Preview(
+    name = "landscape_phone_medium",
+    group = "orientation",
+    widthDp = 640,
+    heightDp = 360,
+    showBackground = true
+)
+@Preview(
+    name = "landscape_phone_large",
+    group = "orientation",
+    widthDp = 800,
+    heightDp = 400,
+    showBackground = true
+)
+@Preview(
+    name = "landscape_tablet",
+    group = "orientation",
+    widthDp = 1280,
+    heightDp = 800,
+    showBackground = true
+)
+annotation class OrientationPreviews
+
 @DevicePreviews
 @ThemesPreview
 annotation class CompletePreviews

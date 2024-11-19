@@ -1144,5 +1144,5 @@
     <color name="black_alpha_80">@color/white_transparent_80</color>
     <color name="black_alpha_90">@color/white_transparent_90</color>
     <color name="black_alpha_100">@color/white_transparent_100</color>
-    <color name="primary_color">#1F41BB</color>
+    <color name="primary_color">#3366CC</color>
 </resources>
