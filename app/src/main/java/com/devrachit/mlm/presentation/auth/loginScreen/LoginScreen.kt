@@ -231,35 +231,36 @@ fun LoginScreenPortrait(
                     .padding(top = 10.sdp)
                     .clickable { onSignUpClick() }
             )
-            Text(
-                text = "Or Login with",
-                color = colorResource(id = R.color.primary_color),
-                style = TextStyleInter12Lh16Fw600(),
-                modifier = Modifier.padding(top = 10.sdp)
-            )
-            OutlinedButton(
-                onClick = onLoginClick,
-                modifier= Modifier
-                    .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
-                    .height(50.sdp)
-                    .widthIn(400.sdp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.bg_neutral_light_default),
-                    disabledContainerColor = colorResource(id = R.color.surface_card_normal_default),
-                ),
-                shape = RoundedCornerShape(10.sdp)
-            ) {
-                Icon(
-                    painter = (painterResource(id = R.drawable.ic_google)),
-                    modifier=Modifier.padding(end=10.sdp).size(20.sdp),
-                    tint= colorResource(id = R.color.content_neutral_primary_black),
-                    contentDescription = null)
-                Text(
-                    text = "Login with Google",
-                    color = colorResource(id = R.color.content_neutral_primary_black),
-                    style= TextStyleInter16Lh24Fw600()
-                )
-            }
+            //ToDo Uncomment this code for login with google
+//            Text(
+//                text = "Or Login with",
+//                color = colorResource(id = R.color.primary_color),
+//                style = TextStyleInter12Lh16Fw600(),
+//                modifier = Modifier.padding(top = 10.sdp)
+//            )
+//            OutlinedButton(
+//                onClick = onLoginWithGoogleClick,
+//                modifier= Modifier
+//                    .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
+//                    .height(50.sdp)
+//                    .widthIn(400.sdp),
+//                colors = ButtonDefaults.buttonColors(
+//                    containerColor = colorResource(id = R.color.bg_neutral_light_default),
+//                    disabledContainerColor = colorResource(id = R.color.surface_card_normal_default),
+//                ),
+//                shape = RoundedCornerShape(10.sdp)
+//            ) {
+//                Icon(
+//                    painter = (painterResource(id = R.drawable.ic_google)),
+//                    modifier=Modifier.padding(end=10.sdp).size(20.sdp),
+//                    tint= colorResource(id = R.color.content_neutral_primary_black),
+//                    contentDescription = null)
+//                Text(
+//                    text = "Login with Google",
+//                    color = colorResource(id = R.color.content_neutral_primary_black),
+//                    style= TextStyleInter16Lh24Fw600()
+//                )
+//            }
 
 
         }

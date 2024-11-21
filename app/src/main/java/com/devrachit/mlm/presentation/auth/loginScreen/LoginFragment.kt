@@ -35,12 +35,18 @@ class LoginFragment:Fragment(){
                     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
                     if(isLandscape){
-                        SplashScreenLandscape(
+                        LoginScreenLandscape(
+                            onForgotPasswordClick = {
+                                // navController.navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+                            },
                             onLoginClick = {
-                                navController.navigate(R.id.action_splashFragment_to_loginFragment)
+                                // viewmodel.login()
                             },
                             onSignUpClick = {
-                                navController.navigate(R.id.action_splashFragment_to_signupFragment)
+                                navController.navigate(R.id.action_loginFragment_to_signupFragment)
+                            },
+                            onLoginWithGoogleClick = {
+                                // viewmodel.loginWithGoogle()
                             }
                         )
                     }
