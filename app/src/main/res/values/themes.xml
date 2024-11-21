@@ -5,5 +5,8 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Mlm" parent="Base.Theme.Mlm" />
+    <style name="Theme.Mlm" parent="Base.Theme.Mlm" >
+        <item name="android:statusBarColor">@color/surface_card_normal_default</item>
+        <item name="android:navigationBarColor">@color/surface_card_normal_default</item>
+    </style>
 </resources>

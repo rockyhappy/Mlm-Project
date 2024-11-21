@@ -1,5 +1,6 @@
 package com.devrachit.mlm.presentation.auth.splashScreen
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import com.devrachit.mlm.R
 import com.devrachit.mlm.utility.theme.MlmTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,9 +33,35 @@ class SplashFragment:Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+
             setContent {
                 MlmTheme {
-                    SplashScreen()
+                    val navController = findNavController()
+                    val configuration = LocalConfiguration.current
+                    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+                    if(isLandscape){
+                        SplashScreenLandscape(
+                            onLoginClick = {
+                                navController.navigate(R.id.action_splashFragment_to_loginFragment)
+                            },
+                            onSignUpClick = {
+                                navController.navigate(R.id.action_splashFragment_to_signupFragment)
+                            }
+                        )
+                    }
+                    else
+                    {
+                        SplashScreenPortrait(
+                            onLoginClick = {
+                                navController.navigate(R.id.action_splashFragment_to_loginFragment)
+                            },
+                            onSignUpClick = {
+                                navController.navigate(R.id.action_splashFragment_to_signupFragment)
+                            }
+                        )
+                    }
+
                 }
             }
         }
