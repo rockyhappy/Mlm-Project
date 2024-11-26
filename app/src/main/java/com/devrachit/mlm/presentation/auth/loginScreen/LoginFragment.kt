@@ -41,9 +41,9 @@ class LoginFragment:Fragment(){
                         LoginScreenLandscape(
                             uiStates = uiStates.value,
                             onForgotPasswordClick = {
-                                // navController.navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+                                 navController.navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
                             },
-                            onLoginClick = viewmodel::onLoginClick,// viewmodel.login(),
+                            onLoginClick = viewmodel::onLoginClick,
                             onSignUpClick = {
                                 navController.navigate(R.id.action_loginFragment_to_signupFragment)
                             },
@@ -63,7 +63,7 @@ class LoginFragment:Fragment(){
                                 navController.navigate(R.id.action_loginFragment_to_signupFragment)
                             },
                             onForgotPasswordClick = {
-//                                navController.navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+                                navController.navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
                             },
                             onLoginWithGoogleClick = {
                                 // viewmodel.loginWithGoogle()
