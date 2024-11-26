@@ -67,7 +67,7 @@ fun LoginScreenPortrait(
     setPassword: (String) -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }  
     var isPasswordVisible by remember { mutableStateOf(false) }
 
     Column(
@@ -123,130 +123,133 @@ fun LoginScreenPortrait(
         {
 
             val focusManager = LocalFocusManager.current
-            Column{
+            Column {
 
-            OutlinedTextField(
-                value = uiStates?.email ?: "",
-                onValueChange = { setEmail(it) },
-                shape = RoundedCornerShape(10.sdp),
-                modifier = Modifier
-                    .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
-                    .widthIn(400.sdp),
-                label = {
-                    Text(
-                        text = "Email",
-                        style = TextStyleInter14Lh16Fw400(),
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(16.sdp))
-                            .background(Color.Transparent)
-                    )
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-                keyboardActions = KeyboardActions(
-                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                ),
-                maxLines = 1,
-                isError = uiStates?.isEmailValid == false,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                    unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                    focusedBorderColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
-                        id = R.color.stroke_danger_normal
-                    ),
-                    unfocusedBorderColor = Color.Transparent,
-                    cursorColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
-                        id = R.color.stroke_danger_normal
-                    ),
-                    focusedLabelColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
-                        id = R.color.stroke_danger_normal
-                    ),
-                    unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
-                    focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                    unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                    focusedPlaceholderColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
-                        id = R.color.stroke_danger_normal
-                    ),
-                    unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
-                    errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
-                    errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                    errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
-                ),
-
-                )
-            if (uiStates?.isEmailValid == false)
-                Text(
-                    text = uiStates.errorEmailMessage,
-                    color = colorResource(id = R.color.stroke_danger_normal),
-                    style = TextStyleInter12Lh16Fw400(),
+                OutlinedTextField(
+                    value = uiStates?.email ?: "",
+                    onValueChange = { setEmail(it) },
+                    shape = RoundedCornerShape(10.sdp),
                     modifier = Modifier
-                        .padding(start = 24.sdp, end = 24.sdp)
-                        .align(Alignment.Start),
-                )
-        }
-            OutlinedTextField(
-                value = uiStates?.password ?: "",
-                onValueChange = { setPassword(it) },
-                shape = RoundedCornerShape(10.sdp),
-                modifier = Modifier
-                    .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
-                    .widthIn(400.sdp),
-                label = {
-                    Text(
-                        text = "Password",
-                        style = TextStyleInter14Lh16Fw400(),
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(16.sdp))
-                            .background(Color.Transparent)
-                    )
-                },
-                visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                trailingIcon = {
-                    val image = if (isPasswordVisible)
-                        painterResource(id = R.drawable.ic_eye_closed)
-                    else
-                        painterResource(id = R.drawable.ic_eye_opened)
+                        .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
+                        .widthIn(400.sdp),
+                    label = {
+                        Text(
+                            text = "Email",
+                            style = TextStyleInter14Lh16Fw400(),
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(16.sdp))
+                                .background(Color.Transparent)
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                    keyboardActions = KeyboardActions(
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                    ),
+                    maxLines = 1,
+                    isError = uiStates?.isEmailValid == false,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        focusedBorderColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                            id = R.color.stroke_danger_normal
+                        ),
+                        unfocusedBorderColor = Color.Transparent,
+                        cursorColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                            id = R.color.stroke_danger_normal
+                        ),
+                        focusedLabelColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                            id = R.color.stroke_danger_normal
+                        ),
+                        unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedPlaceholderColor = if (uiStates?.isEmailValid != false) colorResource(
+                            id = R.color.primary_color
+                        ) else colorResource(
+                            id = R.color.stroke_danger_normal
+                        ),
+                        unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                        errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                        errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                    ),
 
-                    IconButton(
-                        onClick = { isPasswordVisible = !isPasswordVisible },
+                    )
+                if (uiStates?.isEmailValid == false)
+                    Text(
+                        text = uiStates.errorEmailMessage,
+                        color = colorResource(id = R.color.stroke_danger_normal),
+                        style = TextStyleInter12Lh16Fw400(),
                         modifier = Modifier
-                            .size(24.sdp)
-                    ) {
-                        Icon(painter = image, contentDescription = null)
-                    }
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(
-                    onDone = { focusManager.clearFocus() }
-                ),
-                maxLines = 1,
-                isError = uiStates?.isPasswordValid == false,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                    unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                    focusedBorderColor = colorResource(id = R.color.primary_color),
-                    unfocusedBorderColor = Color.Transparent,
-                    cursorColor = colorResource(id = R.color.primary_color),
-                    focusedLabelColor = colorResource(id = R.color.primary_color),
-                    unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
-                    focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                    unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                    focusedPlaceholderColor = colorResource(id = R.color.primary_color),
-                    unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
-                    errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
-                    errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                    errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                            .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                            .align(Alignment.Start),
+                    )
+            }
+            Column {
+                OutlinedTextField(
+                    value = uiStates?.password ?: "",
+                    onValueChange = { setPassword(it) },
+                    shape = RoundedCornerShape(10.sdp),
+                    modifier = Modifier
+                        .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
+                        .widthIn(400.sdp),
+                    label = {
+                        Text(
+                            text = "Password",
+                            style = TextStyleInter14Lh16Fw400(),
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(16.sdp))
+                                .background(Color.Transparent)
+                        )
+                    },
+                    visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+                        val image = if (isPasswordVisible)
+                            painterResource(id = R.drawable.ic_eye_closed)
+                        else
+                            painterResource(id = R.drawable.ic_eye_opened)
+
+                        IconButton(
+                            onClick = { isPasswordVisible = !isPasswordVisible },
+                            modifier = Modifier
+                                .size(24.sdp)
+                        ) {
+                            Icon(painter = image, contentDescription = null)
+                        }
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                    keyboardActions = KeyboardActions(
+                        onDone = { focusManager.clearFocus() }
+                    ),
+                    maxLines = 1,
+                    isError = uiStates?.isPasswordValid == false,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        focusedBorderColor = colorResource(id = R.color.primary_color),
+                        unfocusedBorderColor = Color.Transparent,
+                        cursorColor = colorResource(id = R.color.primary_color),
+                        focusedLabelColor = colorResource(id = R.color.primary_color),
+                        unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                        unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                        errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                        errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                    )
                 )
-            )
-            if(uiStates?.isPasswordValid == false)
-            Text(
-                text = uiStates.errorPasswordMessage,
-                color = colorResource(id = R.color.stroke_danger_normal),
-                style = TextStyleInter12Lh16Fw400(),
-                modifier = Modifier
-                    .padding(start = 24.sdp, end = 24.sdp)
-                    .align(Alignment.Start)
-                ,
-            )
+                if (uiStates?.isPasswordValid == false)
+                    Text(
+                        text = uiStates.errorPasswordMessage,
+                        color = colorResource(id = R.color.stroke_danger_normal),
+                        style = TextStyleInter12Lh16Fw400(),
+                        modifier = Modifier
+                            .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                            .align(Alignment.Start),
+                    )
+            }
             Row(
                 modifier = Modifier
                     .widthIn(400.sdp)

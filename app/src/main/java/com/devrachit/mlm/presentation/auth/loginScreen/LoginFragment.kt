@@ -39,6 +39,7 @@ class LoginFragment:Fragment(){
                     val uiStates = viewmodel.uiStates.collectAsStateWithLifecycle()
                     if(isLandscape){
                         LoginScreenLandscape(
+                            uiStates = uiStates.value,
                             onForgotPasswordClick = {
                                 // navController.navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
                             },
@@ -48,7 +49,9 @@ class LoginFragment:Fragment(){
                             },
                             onLoginWithGoogleClick = {
                                 // viewmodel.loginWithGoogle()
-                            }
+                            },
+                            setEmail =viewmodel::setEmail,
+                            setPassword = viewmodel::setPassword
                         )
                     }
                     else
