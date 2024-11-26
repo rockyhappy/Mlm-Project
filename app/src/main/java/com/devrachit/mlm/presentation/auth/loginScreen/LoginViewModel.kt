@@ -31,13 +31,12 @@ class LoginViewModel @Inject constructor(
 
     fun onLoginClick()
     {
-        Log.d("uiStates",_uiStates.value.toString())
+
         if(_uiStates.value.email?.isValidEmail()?.not() == false)
         {
             _uiStates.value=_uiStates.value.copy(
                 isEmailValid = true
             )
-            Log.d("uistateError ",_uiStates.value.isEmailValid.toString())
         }
         else{
             _uiStates.value=_uiStates.value.copy(
