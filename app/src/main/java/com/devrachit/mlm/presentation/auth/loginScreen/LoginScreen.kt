@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -30,11 +32,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -52,10 +58,13 @@ import com.devrachit.mlm.utility.theme.TextStyleInter18Lh24Fw700
 
 @Composable
 fun LoginScreenPortrait(
+    uiStates: LoginStates? = LoginStates(),
     onForgotPasswordClick: () -> Unit = {},
     onLoginClick: () -> Unit = {},
     onSignUpClick: () -> Unit = {},
-    onLoginWithGoogleClick: () -> Unit = {}
+    onLoginWithGoogleClick: () -> Unit = {},
+    setEmail: (String) -> Unit = {},
+    setPassword: (String) -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -113,9 +122,12 @@ fun LoginScreenPortrait(
         )
         {
 
+            val focusManager = LocalFocusManager.current
+            Column{
+
             OutlinedTextField(
-                value = email,
-                onValueChange = { email=it },
+                value = uiStates?.email ?: "",
+                onValueChange = { setEmail(it) },
                 shape = RoundedCornerShape(10.sdp),
                 modifier = Modifier
                     .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
@@ -124,28 +136,56 @@ fun LoginScreenPortrait(
                     Text(
                         text = "Email",
                         style = TextStyleInter14Lh16Fw400(),
-                        modifier= Modifier
+                        modifier = Modifier
                             .clip(RoundedCornerShape(16.sdp))
                             .background(Color.Transparent)
                     )
                 },
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(
+                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                ),
+                maxLines = 1,
+                isError = uiStates?.isEmailValid == false,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
                     unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                    focusedBorderColor = colorResource(id = R.color.primary_color),
+                    focusedBorderColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                        id = R.color.stroke_danger_normal
+                    ),
                     unfocusedBorderColor = Color.Transparent,
-                    cursorColor = colorResource(id = R.color.primary_color),
-                    focusedLabelColor = colorResource(id = R.color.primary_color),
+                    cursorColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                        id = R.color.stroke_danger_normal
+                    ),
+                    focusedLabelColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                        id = R.color.stroke_danger_normal
+                    ),
                     unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
                     focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
                     unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                    focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                    focusedPlaceholderColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                        id = R.color.stroke_danger_normal
+                    ),
                     unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                    errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                    errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                    errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                ),
+
                 )
-            )
+            if (uiStates?.isEmailValid == false)
+                Text(
+                    text = uiStates.errorEmailMessage,
+                    color = colorResource(id = R.color.stroke_danger_normal),
+                    style = TextStyleInter12Lh16Fw400(),
+                    modifier = Modifier
+                        .padding(start = 24.sdp, end = 24.sdp)
+                        .align(Alignment.Start),
+                )
+        }
             OutlinedTextField(
-                value = password,
-                onValueChange = { password=it },
+                value = uiStates?.password ?: "",
+                onValueChange = { setPassword(it) },
                 shape = RoundedCornerShape(10.sdp),
                 modifier = Modifier
                     .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
@@ -154,7 +194,7 @@ fun LoginScreenPortrait(
                     Text(
                         text = "Password",
                         style = TextStyleInter14Lh16Fw400(),
-                        modifier= Modifier
+                        modifier = Modifier
                             .clip(RoundedCornerShape(16.sdp))
                             .background(Color.Transparent)
                     )
@@ -174,6 +214,12 @@ fun LoginScreenPortrait(
                         Icon(painter = image, contentDescription = null)
                     }
                 },
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(
+                    onDone = { focusManager.clearFocus() }
+                ),
+                maxLines = 1,
+                isError = uiStates?.isPasswordValid == false,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
                     unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
@@ -186,15 +232,28 @@ fun LoginScreenPortrait(
                     unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
                     focusedPlaceholderColor = colorResource(id = R.color.primary_color),
                     unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                    errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                    errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                    errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
                 )
             )
+            if(uiStates?.isPasswordValid == false)
+            Text(
+                text = uiStates.errorPasswordMessage,
+                color = colorResource(id = R.color.stroke_danger_normal),
+                style = TextStyleInter12Lh16Fw400(),
+                modifier = Modifier
+                    .padding(start = 24.sdp, end = 24.sdp)
+                    .align(Alignment.Start)
+                ,
+            )
             Row(
-                modifier= Modifier
+                modifier = Modifier
                     .widthIn(400.sdp)
                     .padding(end = 24.sdp),
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
-            ){
+            ) {
                 Text(
                     text = "Forgot Password?",
                     color = colorResource(id = R.color.primary_color),
@@ -207,7 +266,7 @@ fun LoginScreenPortrait(
 
             Button(
                 onClick = onLoginClick,
-                modifier= Modifier
+                modifier = Modifier
                     .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
                     .height(50.sdp)
                     .widthIn(400.sdp),
@@ -220,7 +279,7 @@ fun LoginScreenPortrait(
                 Text(
                     text = "Login",
                     color = colorResource(id = R.color.extra_blue_0),
-                    style= TextStyleInter16Lh24Fw600()
+                    style = TextStyleInter16Lh24Fw600()
                 )
             }
             Text(
