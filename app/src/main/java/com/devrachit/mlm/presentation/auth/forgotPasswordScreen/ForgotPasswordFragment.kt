@@ -1,4 +1,4 @@
-package com.devrachit.mlm.presentation.auth.signupScreen
+package com.devrachit.mlm.presentation.auth.forgotPasswordScreen
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -17,8 +17,9 @@ import com.devrachit.mlm.utility.theme.MlmTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignupFragment:Fragment() {
-    private val viewmodel :SignupViewModel by viewModels()
+class ForgotPasswordFragment : Fragment() {
+
+    private val viewModel: ForgotPasswordViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,41 +28,36 @@ class SignupFragment:Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent{
+
+            setContent {
                 MlmTheme {
                     val navController = findNavController()
                     val configuration = LocalConfiguration.current
                     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-                    val uiStates = viewmodel.uiStates.collectAsStateWithLifecycle()
+                    val uiStates = viewModel.uiStates.collectAsStateWithLifecycle()
                     if(isLandscape) {
-                        SignupScreenLandscape(
-                            uiStates = uiStates.value,
-                            onLoginClick = {
-                                navController.navigate(R.id.action_signupFragment_to_loginFragment)
-                            },
-                            onSignUpClick = viewmodel::onSignupClick,
-                            setEmail = viewmodel::setEmail,
-                            setPassword = viewmodel::setPassword,
-                            setConfirmPassword = viewmodel::setConfirmPassword
-                        )
-                    }
-                    else
-                    {
-                        SignupScreen(
-                            uiStates = uiStates.value,
-                            onLoginClick = {
-                                navController.navigate(R.id.action_signupFragment_to_loginFragment)
-                            },
-                            onSignUpClick = viewmodel::onSignupClick,
-                            setEmail = viewmodel::setEmail,
-                            setPassword = viewmodel::setPassword,
-                            setConfirmPassword = viewmodel::setConfirmPassword
-                        )
 
+                        ForgotPasswordScreenLandscape(
+                            uiStates = uiStates.value,
+                            onForgotPasswordClick = {viewModel::onForgotPasswordClick;
+                                                    navController.navigate(R.id.action_forgetPasswordFragment_to_otpFragment)},
+                            setEmail = viewModel::setEmail
+                        )
                     }
+                    else{
+                        ForgotPasswordScreen(
+                            uiStates = uiStates.value,
+                            onForgotPasswordClick = {viewModel::onForgotPasswordClick;
+                                                    navController.navigate(R.id.action_forgetPasswordFragment_to_otpFragment)},
+                            setEmail = viewModel::setEmail
+                        )
+                    }
+
                 }
+
             }
         }
+
     }
 
 }

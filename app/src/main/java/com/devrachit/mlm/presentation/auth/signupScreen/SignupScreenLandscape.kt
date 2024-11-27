@@ -1,4 +1,4 @@
-package com.devrachit.mlm.presentation.auth.loginScreen
+package com.devrachit.mlm.presentation.auth.signupScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,6 +39,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.devrachit.mlm.R
+import com.devrachit.mlm.presentation.auth.loginScreen.LoginStates
 import com.devrachit.mlm.utility.composeUtility.CompletePreviews
 import com.devrachit.mlm.utility.composeUtility.OrientationPreviews
 import com.devrachit.mlm.utility.composeUtility.sdp
@@ -50,19 +51,18 @@ import com.devrachit.mlm.utility.theme.TextStyleInter16Lh24Fw700
 import com.devrachit.mlm.utility.theme.TextStyleInter18Lh24Fw700
 
 @Composable
-fun LoginScreenLandscape(
-    uiStates: LoginStates? = LoginStates(),
-    onForgotPasswordClick: () -> Unit = {},
+fun SignupScreenLandscape(
+    uiStates: SignupStates? = SignupStates(),
     onLoginClick: () -> Unit = {},
     onSignUpClick: () -> Unit = {},
     onLoginWithGoogleClick: () -> Unit = {},
     setEmail: (String) -> Unit = {},
-    setPassword: (String) -> Unit = {}
+    setPassword: (String) -> Unit = {},
+    setConfirmPassword: (String) -> Unit = {}
 )
 {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
+    var isConfirmPasswordVisible by remember { mutableStateOf(false) }
     Row(
         modifier= Modifier
             .fillMaxSize()
@@ -73,13 +73,13 @@ fun LoginScreenLandscape(
     )
     {
         Column(
-            modifier=Modifier.weight(0.35f).padding(start=22.sdp,end=22.sdp),
+            modifier= Modifier.weight(0.35f).padding(start=22.sdp,end=22.sdp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         )
         {
             Text(
-                text = "Login Here",
+                text = "Signup Here",
                 color = colorResource(id = R.color.primary_color),
                 fontSize = 24.ssp,
                 fontFamily = TextStyleInter18Lh24Fw700().fontFamily,
@@ -91,7 +91,7 @@ fun LoginScreenLandscape(
 
             )
             Text(
-                text = "Welcome Back \nyou've been missed",
+                text = "Create an account \nto get started",
                 color = colorResource(id = R.color.content_neutral_primary_black),
                 style = TextStyleInter16Lh24Fw700(),
                 textAlign = TextAlign.Center,
@@ -101,7 +101,7 @@ fun LoginScreenLandscape(
             )
         }
         Column(
-            modifier=Modifier.weight(0.65f).fillMaxSize(),
+            modifier= Modifier.weight(0.65f).fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         )
@@ -191,7 +191,7 @@ fun LoginScreenLandscape(
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(
-                        onDone = { focusManager.clearFocus() }
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
                     ),
                     maxLines = 1,
                     isError = uiStates?.isPasswordValid == false,
@@ -222,25 +222,90 @@ fun LoginScreenLandscape(
                             .align(Alignment.Start),
                     )
             }
-            Row(
-                modifier= Modifier
-                    .widthIn(400.sdp)
-                    .padding(end = 24.sdp),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
-            ){
-                Text(
-                    text = "Forgot Password?",
-                    color = colorResource(id = R.color.primary_color),
-                    style = TextStyleInter16Lh24Fw600(),
+            Column {
+                OutlinedTextField(
+                    value = uiStates?.confirmPassword ?: "",
+                    onValueChange = { setConfirmPassword(it) },
+                    shape = RoundedCornerShape(10.sdp),
                     modifier = Modifier
-                        .padding(top = 10.sdp)
-                        .clickable { onForgotPasswordClick() }
+                        .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
+                        .widthIn(400.sdp),
+                    label = {
+                        Text(
+                            text = "Confirm Password",
+                            style = TextStyleInter14Lh16Fw400(),
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(16.sdp))
+                                .background(Color.Transparent)
+                        )
+                    },
+                    visualTransformation = if (isConfirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    trailingIcon = {
+                        val image = if (isConfirmPasswordVisible)
+                            painterResource(id = R.drawable.ic_eye_closed)
+                        else
+                            painterResource(id = R.drawable.ic_eye_opened)
+
+                        IconButton(
+                            onClick = { isConfirmPasswordVisible = !isConfirmPasswordVisible },
+                            modifier = Modifier
+                                .size(24.sdp)
+                        ) {
+                            Icon(painter = image, contentDescription = null)
+                        }
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                    keyboardActions = KeyboardActions(
+                        onDone = { focusManager.clearFocus() }
+                    ),
+                    maxLines = 1,
+                    isError = uiStates?.isConfirmPasswordValid == false,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        focusedBorderColor = colorResource(id = R.color.primary_color),
+                        unfocusedBorderColor = Color.Transparent,
+                        cursorColor = colorResource(id = R.color.primary_color),
+                        focusedLabelColor = colorResource(id = R.color.primary_color),
+                        unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                        unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                        errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                        errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                    )
                 )
+                if (uiStates?.isConfirmPasswordValid == false)
+                    Text(
+                        text = uiStates.errorConfirmPasswordMessage,
+                        color = colorResource(id = R.color.stroke_danger_normal),
+                        style = TextStyleInter12Lh16Fw400(),
+                        modifier = Modifier
+                            .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                            .align(Alignment.Start),
+                    )
             }
+//            Row(
+//                modifier= Modifier
+//                    .widthIn(400.sdp)
+//                    .padding(end = 24.sdp),
+//                horizontalArrangement = Arrangement.End,
+//                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+//            ){
+//                Text(
+//                    text = "Forgot Password?",
+//                    color = colorResource(id = R.color.primary_color),
+//                    style = TextStyleInter16Lh24Fw600(),
+//                    modifier = Modifier
+//                        .padding(top = 10.sdp)
+//                        .clickable { onForgotPasswordClick() }
+//                )
+//            }
 
             Button(
-                onClick = onLoginClick,
+                onClick = onSignUpClick,
                 modifier= Modifier
                     .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
                     .height(50.sdp)
@@ -252,13 +317,13 @@ fun LoginScreenLandscape(
                 shape = RoundedCornerShape(10.sdp)
             ) {
                 Text(
-                    text = "Login",
+                    text = "SignUp",
                     color = colorResource(id = R.color.extra_blue_0),
                     style= TextStyleInter16Lh24Fw600()
                 )
             }
             Text(
-                text = "Create an account",
+                text = "Already have an account",
                 color = colorResource(id = R.color.content_neutral_primary_black),
                 style = TextStyleInter16Lh24Fw600(),
                 modifier = Modifier
@@ -267,12 +332,11 @@ fun LoginScreenLandscape(
             )
         }
     }
-
 }
 
 @OrientationPreviews
 @Composable
-fun LoginScreenLandscapePreview()
+fun PreviewSignupScreenLandscape()
 {
-    LoginScreenLandscape()
+    SignupScreenLandscape()
 }

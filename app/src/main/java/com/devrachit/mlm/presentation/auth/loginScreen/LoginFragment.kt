@@ -10,12 +10,15 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.findNavController
 import com.devrachit.mlm.R
 import com.devrachit.mlm.presentation.auth.splashScreen.SplashScreenLandscape
 import com.devrachit.mlm.presentation.auth.splashScreen.SplashScreenPortrait
 import com.devrachit.mlm.utility.theme.MlmTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment:Fragment(){
 
     private val viewmodel: LoginViewModel by viewModels()
@@ -33,32 +36,40 @@ class LoginFragment:Fragment(){
                     val navController = findNavController()
                     val configuration = LocalConfiguration.current
                     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-
+                    val uiStates = viewmodel.uiStates.collectAsStateWithLifecycle()
                     if(isLandscape){
-                        SplashScreenLandscape(
-                            onLoginClick = {
-                                navController.navigate(R.id.action_splashFragment_to_loginFragment)
+                        LoginScreenLandscape(
+                            uiStates = uiStates.value,
+                            onForgotPasswordClick = {
+                                 navController.navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
                             },
+                            onLoginClick = viewmodel::onLoginClick,
                             onSignUpClick = {
-                                navController.navigate(R.id.action_splashFragment_to_signupFragment)
-                            }
+                                navController.navigate(R.id.action_loginFragment_to_signupFragment)
+                            },
+                            onLoginWithGoogleClick = {
+                                // viewmodel.loginWithGoogle()
+                            },
+                            setEmail =viewmodel::setEmail,
+                            setPassword = viewmodel::setPassword
                         )
                     }
                     else
                     {
                         LoginScreenPortrait(
-                            onLoginClick = {
-                                // viewmodel.login()
-                            },
+                            uiStates = uiStates.value,
+                            onLoginClick =  viewmodel::onLoginClick,
                             onSignUpClick = {
                                 navController.navigate(R.id.action_loginFragment_to_signupFragment)
                             },
                             onForgotPasswordClick = {
-//                                navController.navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+                                navController.navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
                             },
                             onLoginWithGoogleClick = {
                                 // viewmodel.loginWithGoogle()
-                            }
+                            },
+                            setEmail =viewmodel::setEmail,
+                            setPassword = viewmodel::setPassword
                         )
 
                     }
