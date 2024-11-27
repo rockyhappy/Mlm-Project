@@ -3,7 +3,6 @@ package com.devrachit.mlm.presentation.auth.signupScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,11 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -42,7 +39,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.devrachit.mlm.R
+import com.devrachit.mlm.presentation.auth.loginScreen.LoginStates
 import com.devrachit.mlm.utility.composeUtility.CompletePreviews
+import com.devrachit.mlm.utility.composeUtility.OrientationPreviews
 import com.devrachit.mlm.utility.composeUtility.sdp
 import com.devrachit.mlm.utility.composeUtility.ssp
 import com.devrachit.mlm.utility.theme.TextStyleInter12Lh16Fw400
@@ -52,7 +51,7 @@ import com.devrachit.mlm.utility.theme.TextStyleInter16Lh24Fw700
 import com.devrachit.mlm.utility.theme.TextStyleInter18Lh24Fw700
 
 @Composable
-fun SignupScreen(
+fun SignupScreenLandscape(
     uiStates: SignupStates? = SignupStates(),
     onLoginClick: () -> Unit = {},
     onSignUpClick: () -> Unit = {},
@@ -62,29 +61,23 @@ fun SignupScreen(
     setConfirmPassword: (String) -> Unit = {}
 )
 {
-
     var isPasswordVisible by remember { mutableStateOf(false) }
     var isConfirmPasswordVisible by remember { mutableStateOf(false) }
-    Column(
-        modifier = Modifier
+    Row(
+        modifier= Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
             .background(colorResource(id = R.color.surface_card_normal_default)),
-        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-        verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+
     )
     {
         Column(
-            modifier = Modifier
-                .weight(0.25f)
-                .fillMaxSize()
-                .padding(start = 22.sdp, end = 22.sdp, top = 60.sdp),
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-            verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
-
+            modifier= Modifier.weight(0.35f).padding(start=22.sdp,end=22.sdp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         )
         {
-
             Text(
                 text = "Signup Here",
                 color = colorResource(id = R.color.primary_color),
@@ -108,19 +101,13 @@ fun SignupScreen(
             )
         }
         Column(
-            modifier = Modifier
-                .weight(0.5f)
-                .fillMaxSize()
-                .padding(start = 22.sdp, end = 22.sdp),
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-            verticalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceEvenly
-
+            modifier= Modifier.weight(0.65f).fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly
         )
         {
-
             val focusManager = LocalFocusManager.current
             Column {
-
                 OutlinedTextField(
                     value = uiStates?.email ?: "",
                     onValueChange = { setEmail(it) },
@@ -146,31 +133,20 @@ fun SignupScreen(
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
                         unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                        focusedBorderColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
-                            id = R.color.stroke_danger_normal
-                        ),
+                        focusedBorderColor = colorResource(id = R.color.primary_color),
                         unfocusedBorderColor = Color.Transparent,
-                        cursorColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
-                            id = R.color.stroke_danger_normal
-                        ),
-                        focusedLabelColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
-                            id = R.color.stroke_danger_normal
-                        ),
+                        cursorColor = colorResource(id = R.color.primary_color),
+                        focusedLabelColor = colorResource(id = R.color.primary_color),
                         unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
                         focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
                         unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                        focusedPlaceholderColor = if (uiStates?.isEmailValid != false) colorResource(
-                            id = R.color.primary_color
-                        ) else colorResource(
-                            id = R.color.stroke_danger_normal
-                        ),
+                        focusedPlaceholderColor = colorResource(id = R.color.primary_color),
                         unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
                         errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
                         errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
                         errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
-                    ),
-
                     )
+                )
                 if (uiStates?.isEmailValid == false)
                     Text(
                         text = uiStates.errorEmailMessage,
@@ -213,7 +189,7 @@ fun SignupScreen(
                             Icon(painter = image, contentDescription = null)
                         }
                     },
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(
                         onNext = { focusManager.moveFocus(FocusDirection.Down) }
                     ),
@@ -242,7 +218,7 @@ fun SignupScreen(
                         color = colorResource(id = R.color.stroke_danger_normal),
                         style = TextStyleInter12Lh16Fw400(),
                         modifier = Modifier
-                            .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                            .padding(start = 24.sdp, end = 24.sdp,top=8.sdp)
                             .align(Alignment.Start),
                     )
             }
@@ -312,12 +288,12 @@ fun SignupScreen(
                     )
             }
 //            Row(
-//                modifier = Modifier
+//                modifier= Modifier
 //                    .widthIn(400.sdp)
 //                    .padding(end = 24.sdp),
 //                horizontalArrangement = Arrangement.End,
 //                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
-//            ) {
+//            ){
 //                Text(
 //                    text = "Forgot Password?",
 //                    color = colorResource(id = R.color.primary_color),
@@ -330,7 +306,7 @@ fun SignupScreen(
 
             Button(
                 onClick = onSignUpClick,
-                modifier = Modifier
+                modifier= Modifier
                     .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
                     .height(50.sdp)
                     .widthIn(400.sdp),
@@ -343,7 +319,7 @@ fun SignupScreen(
                 Text(
                     text = "SignUp",
                     color = colorResource(id = R.color.extra_blue_0),
-                    style = TextStyleInter16Lh24Fw600()
+                    style= TextStyleInter16Lh24Fw600()
                 )
             }
             Text(
@@ -352,52 +328,15 @@ fun SignupScreen(
                 style = TextStyleInter16Lh24Fw600(),
                 modifier = Modifier
                     .padding(top = 10.sdp)
-                    .clickable { onLoginClick() }
+                    .clickable { onSignUpClick() }
             )
-            //ToDo Uncomment this code for login with google
-//            Text(
-//                text = "Or Login with",
-//                color = colorResource(id = R.color.primary_color),
-//                style = TextStyleInter12Lh16Fw600(),
-//                modifier = Modifier.padding(top = 10.sdp)
-//            )
-//            OutlinedButton(
-//                onClick = onLoginWithGoogleClick,
-//                modifier= Modifier
-//                    .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
-//                    .height(50.sdp)
-//                    .widthIn(400.sdp),
-//                colors = ButtonDefaults.buttonColors(
-//                    containerColor = colorResource(id = R.color.bg_neutral_light_default),
-//                    disabledContainerColor = colorResource(id = R.color.surface_card_normal_default),
-//                ),
-//                shape = RoundedCornerShape(10.sdp)
-//            ) {
-//                Icon(
-//                    painter = (painterResource(id = R.drawable.ic_google)),
-//                    modifier=Modifier.padding(end=10.sdp).size(20.sdp),
-//                    tint= colorResource(id = R.color.content_neutral_primary_black),
-//                    contentDescription = null)
-//                Text(
-//                    text = "Login with Google",
-//                    color = colorResource(id = R.color.content_neutral_primary_black),
-//                    style= TextStyleInter16Lh24Fw600()
-//                )
-//            }
-
-
         }
-        Box(
-            modifier = Modifier
-                .weight(0.1f)
-                .fillMaxSize()
-        )
     }
-
 }
 
-@CompletePreviews
+@OrientationPreviews
 @Composable
-fun PreviewSignupScreen() {
-    SignupScreen()
+fun PreviewSignupScreenLandscape()
+{
+    SignupScreenLandscape()
 }
