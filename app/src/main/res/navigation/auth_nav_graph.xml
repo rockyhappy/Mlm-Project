@@ -49,5 +49,14 @@
         android:id="@+id/forgetPasswordFragment"
         android:name="com.devrachit.mlm.presentation.auth.forgotPasswordScreen.ForgotPasswordFragment"
         android:label="ForgetPasswordFragment" >
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_otpFragment"
+            app:destination="@id/otpFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="com.devrachit.mlm.presentation.auth.otpScreen.OtpFragment"
+        android:label="OtpFragment" >
     </fragment>
 </navigation>
