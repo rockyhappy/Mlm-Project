@@ -43,7 +43,7 @@ class LoginFragment:Fragment(){
                             onForgotPasswordClick = {
                                  navController.navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
                             },
-                            onLoginClick = viewmodel::onLoginClick,
+                            onLoginClick ={ viewmodel::onLoginClick;navController.navigate(R.id.action_loginFragment_to_select_company_fragment)},
                             onSignUpClick = {
                                 navController.navigate(R.id.action_loginFragment_to_signupFragment)
                             },
@@ -58,7 +58,7 @@ class LoginFragment:Fragment(){
                     {
                         LoginScreenPortrait(
                             uiStates = uiStates.value,
-                            onLoginClick =  viewmodel::onLoginClick,
+                            onLoginClick ={ viewmodel::onLoginClick;navController.navigate(R.id.action_loginFragment_to_select_company_fragment)},
                             onSignUpClick = {
                                 navController.navigate(R.id.action_loginFragment_to_signupFragment)
                             },

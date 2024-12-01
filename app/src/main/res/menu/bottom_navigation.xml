@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    // make four menu items home premium profile and settings-->
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home"
+        android:checkable="true"/>
+    <item
+        android:id="@+id/premiumFragment"
+        android:icon="@drawable/baseline_workspace_premium_24"
+        android:title="Premium"
+        android:checkable="true"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Profile"
+        android:checkable="true"/>
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/baseline_format_list_bulleted_24"
+        android:title="More"
+        android:checkable="true"/>
+</menu>
