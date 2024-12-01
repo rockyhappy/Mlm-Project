@@ -77,5 +77,14 @@
         android:id="@+id/company_details_fragment"
         android:name="com.devrachit.mlm.presentation.dashboard.companyDetails.CompanyDetailsFragment"
         android:label="CompanyDetailsFragment" >
+        <action
+            android:id="@+id/action_company_details_fragment_to_viewAllBannersFragment"
+            app:destination="@id/viewAllBannersFragment" />
+    </fragment>
+
+    <fragment
+        android:id ="@+id/viewAllBannersFragment"
+        android:name ="com.devrachit.mlm.presentation.dashboard.viewAllBanners.ViewAllBannersFragment"
+        android:label ="ViewAllBannersFragment" >
     </fragment>
 </navigation>

@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var bottomNavigationView: BottomNavigationView
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,9 +34,16 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.splashFragment, R.id.signupFragment, R.id.loginFragment, R.id.forgetPasswordFragment, R.id.otpFragment, R.id.select_company_fragment -> {
+                R.id.splashFragment,
+                R.id.signupFragment,
+                R.id.loginFragment,
+                R.id.forgetPasswordFragment,
+                R.id.otpFragment,
+                R.id.select_company_fragment,
+                R.id.viewAllBannersFragment -> {
                     bottomNavigationView.visibility = View.GONE
                 }
+
                 else -> {
                     bottomNavigationView.visibility = View.VISIBLE
                 }
@@ -46,19 +52,22 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeFragment -> {
-                    navController.navigate(R.id.company_details_fragment) // Replace with your fragment ID
+                    navController.navigate(R.id.company_details_fragment)
                     true
                 }
+
                 R.id.premiumFragment -> {
-                    navController.navigate(R.id.company_details_fragment) // Replace with your fragment ID
+                    navController.navigate(R.id.company_details_fragment)
                     true
                 }
+
                 R.id.profileFragment -> {
-                    navController.navigate(R.id.company_details_fragment) // Replace with your fragment ID
+                    navController.navigate(R.id.company_details_fragment)
                     true
                 }
+
                 else -> {
-                    navController.navigate(R.id.company_details_fragment) // Replace with your fragment ID
+                    navController.navigate(R.id.company_details_fragment)
                     true
                 }
             }
