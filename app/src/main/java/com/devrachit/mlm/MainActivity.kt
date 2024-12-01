@@ -32,9 +32,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
         navController = navHostFragment.navController
 
-
         bottomNavigationView.setupWithNavController(navController)
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.splashFragment, R.id.signupFragment, R.id.loginFragment, R.id.forgetPasswordFragment, R.id.otpFragment, R.id.select_company_fragment -> {
@@ -42,6 +40,26 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> {
                     bottomNavigationView.visibility = View.VISIBLE
+                }
+            }
+        }
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeFragment -> {
+                    navController.navigate(R.id.company_details_fragment) // Replace with your fragment ID
+                    true
+                }
+                R.id.premiumFragment -> {
+                    navController.navigate(R.id.company_details_fragment) // Replace with your fragment ID
+                    true
+                }
+                R.id.profileFragment -> {
+                    navController.navigate(R.id.company_details_fragment) // Replace with your fragment ID
+                    true
+                }
+                else -> {
+                    navController.navigate(R.id.company_details_fragment) // Replace with your fragment ID
+                    true
                 }
             }
         }

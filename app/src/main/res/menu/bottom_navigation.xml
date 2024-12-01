@@ -4,18 +4,22 @@
 <!--    // make four menu items home premium profile and settings-->
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_google"
-        android:title="Home" />
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home"
+        android:checkable="true"/>
     <item
         android:id="@+id/premiumFragment"
-        android:icon="@drawable/ic_eye_closed"
-        android:title="Premium" />
+        android:icon="@drawable/baseline_workspace_premium_24"
+        android:title="Premium"
+        android:checkable="true"/>
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_google"
-        android:title="Profile" />
+        android:icon="@drawable/baseline_person_24"
+        android:title="Profile"
+        android:checkable="true"/>
     <item
         android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_eye_closed"
-        android:title="Settings" />
+        android:icon="@drawable/baseline_format_list_bulleted_24"
+        android:title="More"
+        android:checkable="true"/>
 </menu>

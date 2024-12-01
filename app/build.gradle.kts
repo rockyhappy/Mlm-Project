@@ -30,6 +30,7 @@ android {
     }
     buildFeatures{
         compose =true
+        dataBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
@@ -94,7 +95,6 @@ dependencies {
     implementation(libs.scalar)
 
     implementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.bottom)
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
