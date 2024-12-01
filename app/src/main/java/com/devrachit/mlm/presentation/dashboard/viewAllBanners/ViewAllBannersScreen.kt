@@ -33,7 +33,9 @@ import com.devrachit.mlm.utility.composeUtility.sdp
 import com.devrachit.mlm.utility.theme.TextStyleInter14Lh16Fw600
 
 @Composable
-fun ViewAllBannersScreen() {
+fun ViewAllBannersScreen(
+    onItemClick: (String) -> Unit? = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -89,7 +91,8 @@ fun ViewAllBannersScreen() {
                         modifier = Modifier
                             .padding(16.sdp)
                             .clip(RoundedCornerShape(8.sdp))
-                            .size(90.sdp)
+                            .size(140.sdp)
+                            .clickable { onItemClick("Company Details") }
                     )
                     Text(
                         text = "21",
@@ -100,6 +103,7 @@ fun ViewAllBannersScreen() {
                             .clip(RoundedCornerShape(topStart = 6.sdp, bottomEnd = 6.sdp))
                             .background(colorResource(R.color.primary_color))
                             .padding(4.sdp)
+                            .clickable { onItemClick("Company Details") }
                     )
                 }
 
@@ -145,7 +149,8 @@ fun ViewAllBannersScreen() {
                         modifier = Modifier
                             .padding(16.sdp)
                             .clip(RoundedCornerShape(8.sdp))
-                            .size(90.sdp)
+                            .size(140.sdp)
+                            .clickable { onItemClick("Company Details") }
                     )
 
                     AsyncImage(
@@ -155,7 +160,8 @@ fun ViewAllBannersScreen() {
                         modifier = Modifier
                             .padding(16.sdp)
                             .clip(RoundedCornerShape(8.sdp))
-                            .size(90.sdp)
+                            .size(140.sdp)
+                            .clickable { onItemClick("Company Details") }
                     )
 
                 }
@@ -201,7 +207,8 @@ fun ViewAllBannersScreen() {
                         modifier = Modifier
                             .padding(16.sdp)
                             .clip(RoundedCornerShape(8.sdp))
-                            .size(90.sdp)
+                            .size(140.sdp)
+                            .clickable { onItemClick("Company Details") }
                     )
                     AsyncImage(
                         model = "https://picsum.photos/200/300",
@@ -210,7 +217,8 @@ fun ViewAllBannersScreen() {
                         modifier = Modifier
                             .padding(16.sdp)
                             .clip(RoundedCornerShape(8.sdp))
-                            .size(90.sdp)
+                            .size(140.sdp)
+                            .clickable { onItemClick("Company Details") }
                     )
                     AsyncImage(
                         model = "https://picsum.photos/200/300",
@@ -219,7 +227,8 @@ fun ViewAllBannersScreen() {
                         modifier = Modifier
                             .padding(16.sdp)
                             .clip(RoundedCornerShape(8.sdp))
-                            .size(90.sdp)
+                            .size(140.sdp)
+                            .clickable { onItemClick("Company Details") }
                     )
                 }
             }

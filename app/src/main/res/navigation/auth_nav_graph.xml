@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/auth_nav_graph"
-    app:startDestination="@id/company_details_fragment"
+    app:startDestination="@id/splashFragment"
     >
 
     <fragment
@@ -80,11 +80,23 @@
         <action
             android:id="@+id/action_company_details_fragment_to_viewAllBannersFragment"
             app:destination="@id/viewAllBannersFragment" />
+        <action
+            android:id="@+id/action_company_details_fragment_to_bannerDetailsFragment"
+            app:destination="@id/bannerDetailsFragment" />
     </fragment>
 
     <fragment
         android:id ="@+id/viewAllBannersFragment"
         android:name ="com.devrachit.mlm.presentation.dashboard.viewAllBanners.ViewAllBannersFragment"
         android:label ="ViewAllBannersFragment" >
+        <action
+            android:id="@+id/action_viewAllBannersFragment_to_bannerDetailsFragment"
+            app:destination="@id/bannerDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bannerDetailsFragment"
+        android:name="com.devrachit.mlm.presentation.dashboard.bannerDetail.BannerDetailFragment"
+        android:label="BannerDetailFragment" >
     </fragment>
 </navigation>

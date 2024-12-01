@@ -119,7 +119,7 @@ fun CompanyDetailsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(16.sdp))
-                        .height(300.sdp)
+                        .height(300.sdp).clickable { onItemClick("Company Details") }
                 )
             }
 
@@ -253,6 +253,7 @@ fun CompanyDetailsScreen(
                             .padding(16.sdp)
                             .clip(RoundedCornerShape(8.sdp))
                             .size(90.sdp)
+                            .clickable { onItemClick("Company Details") }
                     )
                     Text(
                         text = "21",
@@ -308,6 +309,7 @@ fun CompanyDetailsScreen(
                         .padding(16.sdp)
                         .clip(RoundedCornerShape(8.sdp))
                         .size(90.sdp)
+                        .clickable { onItemClick("Company Details") }
                 )
 
             }
@@ -351,6 +353,7 @@ fun CompanyDetailsScreen(
                         .padding(16.sdp)
                         .clip(RoundedCornerShape(8.sdp))
                         .size(90.sdp)
+                        .clickable { onItemClick("Company Details") }
                 )
 
             }
@@ -394,6 +397,7 @@ fun CompanyDetailsScreen(
                         .padding(16.sdp)
                         .clip(RoundedCornerShape(8.sdp))
                         .size(90.sdp)
+                        .clickable { onItemClick("Company Details") }
                 )
 
             }
