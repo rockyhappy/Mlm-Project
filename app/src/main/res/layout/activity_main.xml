@@ -14,18 +14,53 @@
     android:layout_width="0dp"
     android:layout_height="0dp"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:navGraph="@navigation/auth_nav_graph"
     app:defaultNavHost="true"/>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_navigation" />
+
+<!--    <meow.meowbottomnavigation.MeowBottomNavigation-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:mbn_circleColor="#ffffff"-->
+<!--        app:mbn_backgroundBottomColor="#ffffff"-->
+<!--        app:mbn_countBackgroundColor="#ff6f00"-->
+<!--        app:mbn_countTextColor="#ffffff"-->
+<!--        app:mbn_countTypeface="fonts/SourceSansPro-Regular.ttf"-->
+<!--        app:mbn_defaultIconColor="#90a4ae"-->
+<!--        app:mbn_rippleColor="#2f424242"-->
+<!--        app:mbn_selectedIconColor="#3c415e"-->
+<!--        app:mbn_shadowColor="#1f212121"-->
+<!--        app:mbn_hasAnimation="true"-->
+<!--        />-->
+<!--    <com.gauravk.bubblenavigation.BubbleNavigationConstraintView-->
+<!--        android:id="@+id/bottomNavigation2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cbn_background="@color/black"-->
+<!--        app:cbn_fabColor="@color/purple_200"-->
+<!--        app:cbn_iconColor="@color/white"-->
+<!--        app:cbn_height="76dp"-->
+<!--        app:cbn_icon_size="24dp"-->
+<!--        app:cbn_curve_radius="26dp"-->
+<!--        app:cbn_selected_icon_size="48dp"-->
+<!--        app:cbn_selectedIconColor="@color/white"-->
+<!--        app:cbn_titleColor="@color/white"-->
+<!--        app:cbn_titleFont="@font/book"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--<androidx.fragment.app.FragmentContainerView-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:id="@+id/nav_host_fragment"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    app:navGraph="@navigation/auth_nav_graph"-->
-<!--    app:defaultNavHost="true" />-->

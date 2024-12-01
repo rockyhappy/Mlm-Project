@@ -44,6 +44,10 @@
             android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
             app:destination="@id/forgetPasswordFragment"
             />
+        <action
+            android:id="@+id/action_loginFragment_to_select_company_fragment"
+            app:destination="@id/select_company_fragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
@@ -58,5 +62,20 @@
         android:id="@+id/otpFragment"
         android:name="com.devrachit.mlm.presentation.auth.otpScreen.OtpFragment"
         android:label="OtpFragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/select_company_fragment"
+        android:name="com.devrachit.mlm.presentation.dashboard.selectCompany.SelectCompanyFragment"
+        android:label="SelectCompanyFragment" >
+        <action
+            android:id="@+id/action_select_company_fragment_to_company_details_fragment"
+            app:destination="@id/company_details_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/company_details_fragment"
+        android:name="com.devrachit.mlm.presentation.dashboard.companyDetails.CompanyDetailsFragment"
+        android:label="CompanyDetailsFragment" >
     </fragment>
 </navigation>
