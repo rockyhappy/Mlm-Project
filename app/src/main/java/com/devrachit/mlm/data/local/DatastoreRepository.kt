@@ -41,6 +41,4 @@ class DataStoreRepository(private val context: Context) {
         }.firstOrNull()
     }
 
-
-
 }

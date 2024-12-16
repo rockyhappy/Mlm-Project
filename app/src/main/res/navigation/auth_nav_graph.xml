@@ -27,6 +27,9 @@
             app:popUpTo="@id/signupFragment"
             app:popUpToInclusive="true"
             />
+        <action
+            android:id="@+id/action_signupFragment_to_otpFragmentSignup"
+            app:destination="@id/otpFragmentSignup" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -98,5 +101,13 @@
         android:id="@+id/bannerDetailsFragment"
         android:name="com.devrachit.mlm.presentation.dashboard.bannerDetail.BannerDetailFragment"
         android:label="BannerDetailFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/otpFragmentSignup"
+        android:name="com.devrachit.mlm.presentation.auth.otpScreenSignup.OtpFragmentSignup"
+        android:label="OtpFragmentSignup" >
+        <action
+            android:id="@+id/action_otpFragmentSignup_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

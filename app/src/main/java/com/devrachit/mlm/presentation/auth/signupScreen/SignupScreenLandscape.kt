@@ -3,6 +3,7 @@ package com.devrachit.mlm.presentation.auth.signupScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,9 +11,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -34,6 +37,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -57,6 +61,8 @@ fun SignupScreenLandscape(
     onSignUpClick: () -> Unit = {},
     onLoginWithGoogleClick: () -> Unit = {},
     setEmail: (String) -> Unit = {},
+    setMobile: (String) -> Unit = {},
+    setName: (String) -> Unit = {},
     setPassword: (String) -> Unit = {},
     setConfirmPassword: (String) -> Unit = {}
 )
@@ -85,8 +91,9 @@ fun SignupScreenLandscape(
                 fontFamily = TextStyleInter18Lh24Fw700().fontFamily,
                 fontWeight = TextStyleInter18Lh24Fw700().fontWeight,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
+                maxLines = 2,
                 lineHeight = 28.ssp,
+                textAlign = TextAlign.Center,
                 modifier = Modifier
 
             )
@@ -96,17 +103,68 @@ fun SignupScreenLandscape(
                 style = TextStyleInter16Lh24Fw700(),
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 2,
+                maxLines = 4,
                 modifier = Modifier.padding(top = 10.sdp)
             )
         }
         Column(
-            modifier= Modifier.weight(0.65f).fillMaxSize(),
+            modifier= Modifier.weight(0.9f).fillMaxSize().verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         )
         {
             val focusManager = LocalFocusManager.current
+            Column {
+
+                OutlinedTextField(
+                    value = uiStates?.name ?: "",
+                    onValueChange = { setName(it) },
+                    shape = RoundedCornerShape(10.sdp),
+                    modifier = Modifier
+                        .padding(start = 24.sdp, end = 24.sdp, top = 30.sdp)
+                        .widthIn(400.sdp),
+                    label = {
+                        Text(
+                            text = "Name",
+                            style = TextStyleInter14Lh16Fw400(),
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(16.sdp))
+                                .background(Color.Transparent)
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                    keyboardActions = KeyboardActions(
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                    ),
+                    maxLines = 1,
+                    isError = uiStates?.isNameValid == false,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        focusedBorderColor = colorResource(id = R.color.primary_color),
+                        unfocusedBorderColor = Color.Transparent,
+                        cursorColor = colorResource(id = R.color.primary_color),
+                        focusedLabelColor = colorResource(id = R.color.primary_color),
+                        unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                        unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                        errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                        errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                    )
+                )
+                if (uiStates?.isNameValid == false)
+                    Text(
+                        text = uiStates.errorNameMessage,
+                        color = colorResource(id = R.color.stroke_danger_normal),
+                        style = TextStyleInter12Lh16Fw400(),
+                        modifier = Modifier
+                            .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                            .align(Alignment.Start),
+                    )
+            }
             Column {
                 OutlinedTextField(
                     value = uiStates?.email ?: "",
@@ -150,6 +208,57 @@ fun SignupScreenLandscape(
                 if (uiStates?.isEmailValid == false)
                     Text(
                         text = uiStates.errorEmailMessage,
+                        color = colorResource(id = R.color.stroke_danger_normal),
+                        style = TextStyleInter12Lh16Fw400(),
+                        modifier = Modifier
+                            .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                            .align(Alignment.Start),
+                    )
+            }
+            Column {
+
+                OutlinedTextField(
+                    value = uiStates?.mobile?: "",
+                    onValueChange = { setMobile(it) },
+                    shape = RoundedCornerShape(10.sdp),
+                    modifier = Modifier
+                        .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
+                        .widthIn(400.sdp),
+                    label = {
+                        Text(
+                            text = "Mobile",
+                            style = TextStyleInter14Lh16Fw400(),
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(16.sdp))
+                                .background(Color.Transparent)
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Phone,imeAction = ImeAction.Next),
+                    keyboardActions = KeyboardActions(
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                    ),
+                    maxLines = 1,
+                    isError = uiStates?.isMobileValid == false,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        focusedBorderColor = colorResource(id = R.color.primary_color),
+                        unfocusedBorderColor = Color.Transparent,
+                        cursorColor = colorResource(id = R.color.primary_color),
+                        focusedLabelColor = colorResource(id = R.color.primary_color),
+                        unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                        focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                        unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                        errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                        errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                        errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                    )
+                )
+                if (uiStates?.isMobileValid == false)
+                    Text(
+                        text = uiStates.errorMobileMessage,
                         color = colorResource(id = R.color.stroke_danger_normal),
                         style = TextStyleInter12Lh16Fw400(),
                         modifier = Modifier
@@ -307,7 +416,7 @@ fun SignupScreenLandscape(
             Button(
                 onClick = onSignUpClick,
                 modifier= Modifier
-                    .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
+                    .padding(start = 24.sdp, end = 24.sdp, top = 30.sdp)
                     .height(50.sdp)
                     .widthIn(400.sdp),
                 colors = ButtonDefaults.buttonColors(
@@ -327,10 +436,12 @@ fun SignupScreenLandscape(
                 color = colorResource(id = R.color.content_neutral_primary_black),
                 style = TextStyleInter16Lh24Fw600(),
                 modifier = Modifier
-                    .padding(top = 10.sdp)
+                    .padding(top = 10.sdp, bottom=30.sdp)
                     .clickable { onSignUpClick() }
             )
+
         }
+
     }
 }
 
