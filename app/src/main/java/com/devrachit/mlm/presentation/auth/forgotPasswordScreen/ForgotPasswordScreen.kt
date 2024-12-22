@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -37,6 +38,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.window.Dialog
 import com.devrachit.mlm.R
 import com.devrachit.mlm.utility.composeUtility.CompletePreviews
 import com.devrachit.mlm.utility.composeUtility.sdp
@@ -52,9 +54,21 @@ import com.devrachit.mlm.utility.theme.TextStyleInter18Lh24Fw700
 fun ForgotPasswordScreen(
     uiStates: ForgotPasswordStates,
     onForgotPasswordClick: () -> Unit,
-    setEmail: (String) -> Unit
+    setEmail: (String) -> Unit,
+    stateSuccess: () -> Unit = {},
+    setForgotPasswordState: (Boolean) -> Unit
 ) {
 
+    if(uiStates.forgotPasswordState)
+    {
+        stateSuccess()
+        setForgotPasswordState(false)
+    }
+    if(uiStates.isLoading){
+        Dialog(onDismissRequest = {}) {
+            CircularProgressIndicator(color = colorResource(id = R.color.primary_color))
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -111,7 +125,7 @@ fun ForgotPasswordScreen(
             Column {
 
                 OutlinedTextField(
-                    value = uiStates?.email ?: "",
+                    value = uiStates?.mobile ?: "",
                     onValueChange = { setEmail(it) },
                     shape = RoundedCornerShape(10.sdp),
                     modifier = Modifier
@@ -131,24 +145,24 @@ fun ForgotPasswordScreen(
                         onNext = { focusManager.moveFocus(FocusDirection.Down) }
                     ),
                     maxLines = 1,
-                    isError = uiStates?.isEmailValid == false,
+                    isError = uiStates?.isMobileValid == false,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
                         unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                        focusedBorderColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                        focusedBorderColor = if (uiStates?.isMobileValid != false) colorResource(id = R.color.primary_color) else colorResource(
                             id = R.color.stroke_danger_normal
                         ),
                         unfocusedBorderColor = Color.Transparent,
-                        cursorColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                        cursorColor = if (uiStates?.isMobileValid != false) colorResource(id = R.color.primary_color) else colorResource(
                             id = R.color.stroke_danger_normal
                         ),
-                        focusedLabelColor = if (uiStates?.isEmailValid != false) colorResource(id = R.color.primary_color) else colorResource(
+                        focusedLabelColor = if (uiStates?.isMobileValid != false) colorResource(id = R.color.primary_color) else colorResource(
                             id = R.color.stroke_danger_normal
                         ),
                         unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
                         focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
                         unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                        focusedPlaceholderColor = if (uiStates?.isEmailValid != false) colorResource(
+                        focusedPlaceholderColor = if (uiStates?.isMobileValid != false) colorResource(
                             id = R.color.primary_color
                         ) else colorResource(
                             id = R.color.stroke_danger_normal
@@ -160,9 +174,9 @@ fun ForgotPasswordScreen(
                     ),
 
                     )
-                if (uiStates?.isEmailValid == false)
+                if (uiStates?.isMobileValid == false)
                     Text(
-                        text = uiStates.errorEmailMessage,
+                        text = uiStates.errorMobileMessage ?: "",
                         color = colorResource(id = R.color.stroke_danger_normal),
                         style = TextStyleInter12Lh16Fw400(),
                         modifier = Modifier
@@ -232,6 +246,8 @@ fun ForgotPasswordScreenPreview() {
     ForgotPasswordScreen(
         uiStates = ForgotPasswordStates(),
         onForgotPasswordClick = {},
-        setEmail = {}
+        setEmail = {},
+        stateSuccess = {},
+        setForgotPasswordState = {}
     )
 }

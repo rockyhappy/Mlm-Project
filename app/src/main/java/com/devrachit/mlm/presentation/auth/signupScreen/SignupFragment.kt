@@ -41,6 +41,8 @@ class SignupFragment:Fragment() {
                             },
                             onSignUpClick = viewmodel::onSignupClick,
                             setEmail = viewmodel::setEmail,
+                            setMobile = viewmodel::setMobile,
+                            setName = viewmodel::setName,
                             setPassword = viewmodel::setPassword,
                             setConfirmPassword = viewmodel::setConfirmPassword
                         )
@@ -54,8 +56,14 @@ class SignupFragment:Fragment() {
                             },
                             onSignUpClick = viewmodel::onSignupClick,
                             setEmail = viewmodel::setEmail,
+                            setMobile = viewmodel::setMobile,
+                            setName = viewmodel::setName,
                             setPassword = viewmodel::setPassword,
-                            setConfirmPassword = viewmodel::setConfirmPassword
+                            setConfirmPassword = viewmodel::setConfirmPassword,
+                            onSignupComplete ={
+                                navController.navigate(R.id.action_signupFragment_to_otpFragmentSignup)
+                            },
+                            setRegistrationState = viewmodel::setRegistrationState
                         )
 
                     }

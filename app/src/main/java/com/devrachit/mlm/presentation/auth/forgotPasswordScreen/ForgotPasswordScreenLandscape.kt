@@ -115,7 +115,7 @@ fun ForgotPasswordScreenLandscape(
             val focusManager = LocalFocusManager.current
             Column {
                 OutlinedTextField(
-                    value = uiStates?.email ?: "",
+                    value = uiStates?.mobile ?: "",
                     onValueChange = { setEmail(it) },
                     shape = RoundedCornerShape(10.sdp),
                     modifier = Modifier
@@ -135,7 +135,7 @@ fun ForgotPasswordScreenLandscape(
                         onNext = { focusManager.moveFocus(FocusDirection.Down) }
                     ),
                     maxLines = 1,
-                    isError = uiStates?.isEmailValid == false,
+                    isError = uiStates?.isMobileValid == false,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
                         unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
@@ -153,9 +153,9 @@ fun ForgotPasswordScreenLandscape(
                         errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
                     )
                 )
-                if (uiStates?.isEmailValid == false)
+                if (uiStates?.isMobileValid == false)
                     Text(
-                        text = uiStates.errorEmailMessage,
+                        text = uiStates.errorMobileMessage,
                         color = colorResource(id = R.color.stroke_danger_normal),
                         style = TextStyleInter12Lh16Fw400(),
                         modifier = Modifier

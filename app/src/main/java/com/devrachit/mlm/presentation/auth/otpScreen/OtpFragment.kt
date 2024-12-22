@@ -45,7 +45,9 @@ class OtpFragment : Fragment() {
                             uiStates = uiStates.value,
                             onOtpClick = viewModel::onOtpClick,
                             onResendOtpClick = {},
-                            onOtpChange = {}
+                            onOtpChange = {},
+                            setPassword = viewModel::setPassword,
+                            setConfirmPassword = viewModel::setConfirmPassword
                         )
                     }
                 }

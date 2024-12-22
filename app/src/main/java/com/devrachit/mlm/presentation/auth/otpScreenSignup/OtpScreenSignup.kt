@@ -1,4 +1,4 @@
-package com.devrachit.mlm.presentation.auth.otpScreen
+package com.devrachit.mlm.presentation.auth.otpScreenSignup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -9,16 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -29,38 +27,34 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.window.Dialog
 import com.devrachit.mlm.R
+import com.devrachit.mlm.presentation.auth.otpScreen.OtpStates
 import com.devrachit.mlm.utility.composeUtility.CompletePreviews
 import com.devrachit.mlm.utility.composeUtility.sdp
 import com.devrachit.mlm.utility.composeUtility.ssp
 import com.devrachit.mlm.utility.theme.TextStyleInter12Lh16Fw400
 import com.devrachit.mlm.utility.theme.TextStyleInter12Lh16Fw500
-import com.devrachit.mlm.utility.theme.TextStyleInter14Lh16Fw400
 import com.devrachit.mlm.utility.theme.TextStyleInter16Lh24Fw600
 import com.devrachit.mlm.utility.theme.TextStyleInter16Lh24Fw700
 import com.devrachit.mlm.utility.theme.TextStyleInter18Lh24Fw700
 
 @Composable
 fun OtpScreenPortrait(
-    uiStates: OtpStates,
+    uiStates: OtpStatesRegister,
     onOtpChange: (String) -> Unit,
     onOtpClick: (String) -> Unit,
     onResendOtpClick: () -> Unit,
-    setConfirmPassword: (String) -> Unit = {},
-    setPassword: (String) -> Unit = {}
-)
+    onOtpVerified: () -> Unit
+    )
 {
     var otp1 by remember { mutableStateOf("") }
     var otp2 by remember { mutableStateOf("") }
@@ -68,9 +62,14 @@ fun OtpScreenPortrait(
     var otp4 by remember { mutableStateOf("") }
     var otp5 by remember { mutableStateOf("") }
     var otp6 by remember { mutableStateOf("") }
-    var isPasswordVisible by remember { mutableStateOf(false) }
-    var isConfirmPasswordVisible by remember { mutableStateOf(false) }
-
+    if (uiStates?.isOtpLoading == true) {
+        Dialog(onDismissRequest = {}) {
+            CircularProgressIndicator(color = colorResource(id = R.color.primary_color))
+        }
+    }
+    if(uiStates?.isOtpVerified == true){
+        onOtpVerified()
+    }
 
     Column(
         modifier = Modifier
@@ -294,6 +293,7 @@ fun OtpScreenPortrait(
                             errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
                         )
                     )
+
                     OutlinedTextField(
                         value = otp5,
                         onValueChange = { if (it.length <= 1) {
@@ -349,7 +349,7 @@ fun OtpScreenPortrait(
                             .width(50.sdp),
                         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done, keyboardType = KeyboardType.Number),
                         keyboardActions = KeyboardActions(
-                            onNext = { focusManager.clearFocus() }
+                            onDone = { focusManager.clearFocus() }
                         ),
                         maxLines = 1,
                         isError = uiStates?.isOtpValid == false,
@@ -370,6 +370,9 @@ fun OtpScreenPortrait(
                             errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
                         )
                     )
+
+
+
                 }
                 if (uiStates?.isOtpValid == false)
                     Text(
@@ -380,139 +383,6 @@ fun OtpScreenPortrait(
                             .padding(start = 24.sdp, end = 24.sdp, top = 8.sdp)
                             .align(Alignment.Start),
                     )
-                Column{
-                    OutlinedTextField(
-                        value = uiStates?.password ?: "",
-                        onValueChange = { setPassword(it) },
-                        shape = RoundedCornerShape(10.sdp),
-                        modifier = Modifier
-                            .padding(start = 24.sdp, end = 24.sdp, top = 40.sdp)
-                            .fillMaxWidth()
-                            .widthIn(400.sdp)
-                        ,
-                        label = {
-                            Text(
-                                text = "Password",
-                                style = TextStyleInter14Lh16Fw400(),
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(16.sdp))
-                                    .background(Color.Transparent)
-                            )
-                        },
-                        visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                        trailingIcon = {
-                            val image = if (isPasswordVisible)
-                                painterResource(id = R.drawable.ic_eye_closed)
-                            else
-                                painterResource(id = R.drawable.ic_eye_opened)
-
-                            IconButton(
-                                onClick = { isPasswordVisible = !isPasswordVisible },
-                                modifier = Modifier
-                                    .size(24.sdp)
-                            ) {
-                                Icon(painter = image, contentDescription = null)
-                            }
-                        },
-                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-                        keyboardActions = KeyboardActions(
-                            onNext = { focusManager.moveFocus(FocusDirection.Down) }
-                        ),
-                        maxLines = 1,
-                        isError = uiStates?.isPasswordValid == false,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                            unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                            focusedBorderColor = colorResource(id = R.color.primary_color),
-                            unfocusedBorderColor = Color.Transparent,
-                            cursorColor = colorResource(id = R.color.primary_color),
-                            focusedLabelColor = colorResource(id = R.color.primary_color),
-                            unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
-                            focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                            unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                            focusedPlaceholderColor = colorResource(id = R.color.primary_color),
-                            unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
-                            errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
-                            errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                            errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
-                        )
-                    )
-                    if (uiStates?.isPasswordValid == false)
-                        Text(
-                            text = uiStates.errorPasswordMessage,
-                            color = colorResource(id = R.color.stroke_danger_normal),
-                            style = TextStyleInter12Lh16Fw400(),
-                            modifier = Modifier
-                                .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
-                                .align(Alignment.Start),
-                        )
-                }
-                Column {
-                    OutlinedTextField(
-                        value = uiStates?.confirmPassword ?: "",
-                        onValueChange = { setConfirmPassword(it) },
-                        shape = RoundedCornerShape(10.sdp),
-                        modifier = Modifier
-                            .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
-                            .fillMaxWidth()
-                            .widthIn(400.sdp),
-                        label = {
-                            Text(
-                                text = "Confirm Password",
-                                style = TextStyleInter14Lh16Fw400(),
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(16.sdp))
-                                    .background(Color.Transparent)
-                            )
-                        },
-                        visualTransformation = if (isConfirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                        trailingIcon = {
-                            val image = if (isConfirmPasswordVisible)
-                                painterResource(id = R.drawable.ic_eye_closed)
-                            else
-                                painterResource(id = R.drawable.ic_eye_opened)
-
-                            IconButton(
-                                onClick = { isConfirmPasswordVisible = !isConfirmPasswordVisible },
-                                modifier = Modifier
-                                    .size(24.sdp)
-                            ) {
-                                Icon(painter = image, contentDescription = null)
-                            }
-                        },
-                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                        keyboardActions = KeyboardActions(
-                            onDone = { focusManager.clearFocus() }
-                        ),
-                        maxLines = 1,
-                        isError = uiStates?.isConfirmPasswordValid == false,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                            unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                            focusedBorderColor = colorResource(id = R.color.primary_color),
-                            unfocusedBorderColor = Color.Transparent,
-                            cursorColor = colorResource(id = R.color.primary_color),
-                            focusedLabelColor = colorResource(id = R.color.primary_color),
-                            unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
-                            focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                            unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
-                            focusedPlaceholderColor = colorResource(id = R.color.primary_color),
-                            unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
-                            errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
-                            errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
-                            errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
-                        )
-                    )
-                    if (uiStates?.isConfirmPasswordValid == false)
-                        Text(
-                            text = uiStates.errorConfirmPasswordMessage,
-                            color = colorResource(id = R.color.stroke_danger_normal),
-                            style = TextStyleInter12Lh16Fw400(),
-                            modifier = Modifier
-                                .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
-                                .align(Alignment.Start),
-                        )
-                }
             }
         }
 //        Row(
@@ -545,13 +415,13 @@ fun OtpScreenPortrait(
             shape = RoundedCornerShape(10.sdp)
         ) {
             Text(
-                text = "Login",
+                text = "Verify",
                 color = colorResource(id = R.color.extra_blue_0),
                 style = TextStyleInter16Lh24Fw600()
             )
         }
         Text(
-            text="An OTP has been sent to your email address",
+            text="An OTP has been sent to your mobile number ",
             color = colorResource(id = R.color.content_neutral_primary_black),
             style = TextStyleInter12Lh16Fw500(),
             textAlign = TextAlign.Center,
@@ -571,9 +441,10 @@ fun OtpScreenPortrait(
 @Composable
 fun PreviewOtpScreenPortrait() {
     OtpScreenPortrait(
-        uiStates = OtpStates(),
+        uiStates = OtpStatesRegister(),
         onOtpChange = {},
         onOtpClick = {},
-        onResendOtpClick = {}
+        onResendOtpClick = {},
+        onOtpVerified = {}
     )
 }

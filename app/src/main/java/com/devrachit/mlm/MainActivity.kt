@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.forgetPasswordFragment,
                 R.id.otpFragment,
                 R.id.select_company_fragment,
-                R.id.viewAllBannersFragment -> {
+                R.id.viewAllBannersFragment ,
+                R.id.otpFragmentSignup-> {
                     bottomNavigationView.visibility = View.GONE
                 }
 

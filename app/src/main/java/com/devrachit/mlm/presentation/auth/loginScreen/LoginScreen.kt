@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -45,6 +46,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.window.Dialog
 import com.devrachit.mlm.R
 import com.devrachit.mlm.utility.composeUtility.CompletePreviews
 import com.devrachit.mlm.utility.composeUtility.sdp
@@ -64,11 +66,23 @@ fun LoginScreenPortrait(
     onSignUpClick: () -> Unit = {},
     onLoginWithGoogleClick: () -> Unit = {},
     setEmail: (String) -> Unit = {},
-    setPassword: (String) -> Unit = {}
+    setPassword: (String) -> Unit = {},
+    setMobile: (String) -> Unit = {},
+    loginSuccess: () -> Unit = {}
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }  
+    var mobile by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
+
+    if (uiStates?.loginState == true) {
+        loginSuccess()
+    }
+
+    if (uiStates?.isLoading == true) {
+        Dialog(onDismissRequest = {}) {
+            CircularProgressIndicator(color = colorResource(id = R.color.primary_color))
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -126,15 +140,15 @@ fun LoginScreenPortrait(
             Column {
 
                 OutlinedTextField(
-                    value = uiStates?.email ?: "",
-                    onValueChange = { setEmail(it) },
+                    value = uiStates?.mobile ?: "",
+                    onValueChange = { setMobile(it) },
                     shape = RoundedCornerShape(10.sdp),
                     modifier = Modifier
                         .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
                         .widthIn(400.sdp),
                     label = {
                         Text(
-                            text = "Email",
+                            text = "Mobile",
                             style = TextStyleInter14Lh16Fw400(),
                             modifier = Modifier
                                 .clip(RoundedCornerShape(16.sdp))
@@ -181,7 +195,7 @@ fun LoginScreenPortrait(
                         color = colorResource(id = R.color.stroke_danger_normal),
                         style = TextStyleInter12Lh16Fw400(),
                         modifier = Modifier
-                            .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                            .padding(start = 24.sdp, end = 24.sdp, top = 8.sdp)
                             .align(Alignment.Start),
                     )
             }
@@ -246,7 +260,7 @@ fun LoginScreenPortrait(
                         color = colorResource(id = R.color.stroke_danger_normal),
                         style = TextStyleInter12Lh16Fw400(),
                         modifier = Modifier
-                            .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                            .padding(start = 24.sdp, end = 24.sdp, top = 8.sdp)
                             .align(Alignment.Start),
                     )
             }

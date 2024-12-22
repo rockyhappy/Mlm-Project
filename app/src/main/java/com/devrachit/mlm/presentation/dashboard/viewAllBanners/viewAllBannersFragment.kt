@@ -10,6 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import com.devrachit.mlm.R
 import com.devrachit.mlm.utility.theme.MlmTheme
 
 
@@ -27,7 +29,10 @@ class ViewAllBannersFragment : Fragment(){
 
             setContent {
                 MlmTheme {
-                    ViewAllBannersScreen()
+                    val navController = findNavController()
+                    ViewAllBannersScreen(
+                        onItemClick = {navController.navigate(R.id.action_viewAllBannersFragment_to_bannerDetailsFragment)}
+                    )
                 }
             }
         }

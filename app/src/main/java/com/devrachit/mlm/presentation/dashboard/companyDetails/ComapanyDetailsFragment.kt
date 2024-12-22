@@ -29,8 +29,9 @@ class CompanyDetailsFragment : Fragment(){
                 MlmTheme {
                     val navController = findNavController()
                     CompanyDetailsScreen(
-                        {navController.navigate(R.id.action_company_details_fragment_to_viewAllBannersFragment)},
-                        {navController.navigate(R.id.action_company_details_fragment_to_viewAllBannersFragment)}
+                        onViewAllClick = {navController.navigate(R.id.action_company_details_fragment_to_viewAllBannersFragment)},
+//                        {navController.navigate(R.id.action_viewAllBannersFragment_to_bannerDetailsFragment)}
+                        onItemClick = {navController.navigate(R.id.action_company_details_fragment_to_bannerDetailsFragment)}
                     )
                 }
             }
