@@ -58,7 +58,7 @@ class LoginFragment:Fragment(){
                     {
                         LoginScreenPortrait(
                             uiStates = uiStates.value,
-                            onLoginClick ={ viewmodel::onLoginClick;navController.navigate(R.id.action_loginFragment_to_select_company_fragment)},
+                            onLoginClick =viewmodel::onLoginClick,
                             onSignUpClick = {
                                 navController.navigate(R.id.action_loginFragment_to_signupFragment)
                             },
@@ -69,7 +69,11 @@ class LoginFragment:Fragment(){
                                 // viewmodel.loginWithGoogle()
                             },
                             setEmail =viewmodel::setEmail,
-                            setPassword = viewmodel::setPassword
+                            setPassword = viewmodel::setPassword,
+                            setMobile = viewmodel::setMobile,
+                            loginSuccess ={
+                                navController.navigate(R.id.action_loginFragment_to_select_company_fragment)
+                            }
                         )
 
                     }

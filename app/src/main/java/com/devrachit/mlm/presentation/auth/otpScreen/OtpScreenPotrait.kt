@@ -58,14 +58,20 @@ fun OtpScreenPortrait(
     onOtpChange: (String) -> Unit,
     onOtpClick: (String) -> Unit,
     onResendOtpClick: () -> Unit,
-    
+    setConfirmPassword: (String) -> Unit = {},
+    setPassword: (String) -> Unit = {}
 )
 {
     var otp1 by remember { mutableStateOf("") }
     var otp2 by remember { mutableStateOf("") }
     var otp3 by remember { mutableStateOf("") }
     var otp4 by remember { mutableStateOf("") }
-    
+    var otp5 by remember { mutableStateOf("") }
+    var otp6 by remember { mutableStateOf("") }
+    var isPasswordVisible by remember { mutableStateOf(false) }
+    var isConfirmPasswordVisible by remember { mutableStateOf(false) }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -255,6 +261,82 @@ fun OtpScreenPortrait(
                         onValueChange = { if (it.length <= 1) {
                             otp4 = it
                             if (it.isNotEmpty()) {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                            if(it.isEmpty()) {
+                                focusManager.moveFocus(FocusDirection.Previous)
+                            }
+                        } },
+                        shape = RoundedCornerShape(10.sdp),
+                        modifier = Modifier
+                            .padding( top = 10.sdp)
+                            .width(50.sdp),
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done, keyboardType = KeyboardType.Number),
+                        keyboardActions = KeyboardActions(
+                            onNext = { focusManager.moveFocus(FocusDirection.Next) }
+                        ),
+                        maxLines = 1,
+                        isError = uiStates?.isOtpValid == false,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            focusedBorderColor = colorResource(id = R.color.primary_color),
+                            unfocusedBorderColor = Color.Transparent,
+                            cursorColor = colorResource(id = R.color.primary_color),
+                            focusedLabelColor = colorResource(id = R.color.primary_color),
+                            unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                            focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                            unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                            focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                            unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                            errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                            errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                        )
+                    )
+                    OutlinedTextField(
+                        value = otp5,
+                        onValueChange = { if (it.length <= 1) {
+                            otp5 = it
+                            if (it.isNotEmpty()) {
+                                focusManager.moveFocus(FocusDirection.Next)
+                            }
+                            if(it.isEmpty()) {
+                                focusManager.moveFocus(FocusDirection.Previous)
+                            }
+                        } },
+                        shape = RoundedCornerShape(10.sdp),
+                        modifier = Modifier
+                            .padding( top = 10.sdp)
+                            .width(50.sdp),
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done, keyboardType = KeyboardType.Number),
+                        keyboardActions = KeyboardActions(
+                            onNext = { focusManager.moveFocus(FocusDirection.Next) }
+                        ),
+                        maxLines = 1,
+                        isError = uiStates?.isOtpValid == false,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            focusedBorderColor = colorResource(id = R.color.primary_color),
+                            unfocusedBorderColor = Color.Transparent,
+                            cursorColor = colorResource(id = R.color.primary_color),
+                            focusedLabelColor = colorResource(id = R.color.primary_color),
+                            unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                            focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                            unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                            focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                            unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                            errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                            errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                        )
+                    )
+                    OutlinedTextField(
+                        value = otp6,
+                        onValueChange = { if (it.length <= 1) {
+                            otp6 = it
+                            if (it.isNotEmpty()) {
                                 focusManager.clearFocus()
                             }
                             if(it.isEmpty()) {
@@ -298,6 +380,139 @@ fun OtpScreenPortrait(
                             .padding(start = 24.sdp, end = 24.sdp, top = 8.sdp)
                             .align(Alignment.Start),
                     )
+                Column{
+                    OutlinedTextField(
+                        value = uiStates?.password ?: "",
+                        onValueChange = { setPassword(it) },
+                        shape = RoundedCornerShape(10.sdp),
+                        modifier = Modifier
+                            .padding(start = 24.sdp, end = 24.sdp, top = 40.sdp)
+                            .fillMaxWidth()
+                            .widthIn(400.sdp)
+                        ,
+                        label = {
+                            Text(
+                                text = "Password",
+                                style = TextStyleInter14Lh16Fw400(),
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(16.sdp))
+                                    .background(Color.Transparent)
+                            )
+                        },
+                        visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                        trailingIcon = {
+                            val image = if (isPasswordVisible)
+                                painterResource(id = R.drawable.ic_eye_closed)
+                            else
+                                painterResource(id = R.drawable.ic_eye_opened)
+
+                            IconButton(
+                                onClick = { isPasswordVisible = !isPasswordVisible },
+                                modifier = Modifier
+                                    .size(24.sdp)
+                            ) {
+                                Icon(painter = image, contentDescription = null)
+                            }
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                        keyboardActions = KeyboardActions(
+                            onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                        ),
+                        maxLines = 1,
+                        isError = uiStates?.isPasswordValid == false,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            focusedBorderColor = colorResource(id = R.color.primary_color),
+                            unfocusedBorderColor = Color.Transparent,
+                            cursorColor = colorResource(id = R.color.primary_color),
+                            focusedLabelColor = colorResource(id = R.color.primary_color),
+                            unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                            focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                            unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                            focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                            unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                            errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                            errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                        )
+                    )
+                    if (uiStates?.isPasswordValid == false)
+                        Text(
+                            text = uiStates.errorPasswordMessage,
+                            color = colorResource(id = R.color.stroke_danger_normal),
+                            style = TextStyleInter12Lh16Fw400(),
+                            modifier = Modifier
+                                .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                                .align(Alignment.Start),
+                        )
+                }
+                Column {
+                    OutlinedTextField(
+                        value = uiStates?.confirmPassword ?: "",
+                        onValueChange = { setConfirmPassword(it) },
+                        shape = RoundedCornerShape(10.sdp),
+                        modifier = Modifier
+                            .padding(start = 24.sdp, end = 24.sdp, top = 10.sdp)
+                            .fillMaxWidth()
+                            .widthIn(400.sdp),
+                        label = {
+                            Text(
+                                text = "Confirm Password",
+                                style = TextStyleInter14Lh16Fw400(),
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(16.sdp))
+                                    .background(Color.Transparent)
+                            )
+                        },
+                        visualTransformation = if (isConfirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                        trailingIcon = {
+                            val image = if (isConfirmPasswordVisible)
+                                painterResource(id = R.drawable.ic_eye_closed)
+                            else
+                                painterResource(id = R.drawable.ic_eye_opened)
+
+                            IconButton(
+                                onClick = { isConfirmPasswordVisible = !isConfirmPasswordVisible },
+                                modifier = Modifier
+                                    .size(24.sdp)
+                            ) {
+                                Icon(painter = image, contentDescription = null)
+                            }
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(
+                            onDone = { focusManager.clearFocus() }
+                        ),
+                        maxLines = 1,
+                        isError = uiStates?.isConfirmPasswordValid == false,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            unfocusedContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            focusedBorderColor = colorResource(id = R.color.primary_color),
+                            unfocusedBorderColor = Color.Transparent,
+                            cursorColor = colorResource(id = R.color.primary_color),
+                            focusedLabelColor = colorResource(id = R.color.primary_color),
+                            unfocusedLabelColor = colorResource(id = R.color.content_neutral_primary_black),
+                            focusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                            unfocusedTextColor = colorResource(id = R.color.content_neutral_primary_black),
+                            focusedPlaceholderColor = colorResource(id = R.color.primary_color),
+                            unfocusedPlaceholderColor = colorResource(id = R.color.content_neutral_primary_black),
+                            errorBorderColor = colorResource(id = R.color.stroke_danger_normal),
+                            errorContainerColor = colorResource(id = R.color.bg_neutral_light_default),
+                            errorLabelColor = colorResource(id = R.color.stroke_danger_normal),
+                        )
+                    )
+                    if (uiStates?.isConfirmPasswordValid == false)
+                        Text(
+                            text = uiStates.errorConfirmPasswordMessage,
+                            color = colorResource(id = R.color.stroke_danger_normal),
+                            style = TextStyleInter12Lh16Fw400(),
+                            modifier = Modifier
+                                .padding(start = 24.sdp, end = 24.sdp, top=8.sdp)
+                                .align(Alignment.Start),
+                        )
+                }
             }
         }
 //        Row(
@@ -318,7 +533,7 @@ fun OtpScreenPortrait(
 //        }
 
         Button(
-            onClick = { onOtpClick(otp1+otp2+otp3+otp4) },
+            onClick = { onOtpClick(otp1+otp2+otp3+otp4+otp5+otp6) },
             modifier = Modifier
                 .padding(start = 48.sdp, end = 48.sdp, top = 10.sdp)
                 .height(50.sdp)

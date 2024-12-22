@@ -33,23 +33,28 @@ class ForgotPasswordFragment : Fragment() {
                 MlmTheme {
                     val navController = findNavController()
                     val configuration = LocalConfiguration.current
-                    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+                    val isLandscape =
+                        configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
                     val uiStates = viewModel.uiStates.collectAsStateWithLifecycle()
-                    if(isLandscape) {
+                    if (isLandscape) {
 
                         ForgotPasswordScreenLandscape(
                             uiStates = uiStates.value,
-                            onForgotPasswordClick = {viewModel::onForgotPasswordClick;
-                                                    navController.navigate(R.id.action_forgetPasswordFragment_to_otpFragment)},
-                            setEmail = viewModel::setEmail
+                            onForgotPasswordClick = {
+                                viewModel::onForgotPasswordClick;
+                                navController.navigate(R.id.action_forgetPasswordFragment_to_otpFragment)
+                            },
+                            setEmail = viewModel::onMobileChange
                         )
-                    }
-                    else{
+                    } else {
                         ForgotPasswordScreen(
                             uiStates = uiStates.value,
-                            onForgotPasswordClick = {viewModel::onForgotPasswordClick;
-                                                    navController.navigate(R.id.action_forgetPasswordFragment_to_otpFragment)},
-                            setEmail = viewModel::setEmail
+                            onForgotPasswordClick = viewModel::onForgotPasswordClick,
+                            stateSuccess = {
+                                navController.navigate(R.id.action_forgetPasswordFragment_to_otpFragment)
+                            },
+                            setEmail = viewModel::onMobileChange,
+                            setForgotPasswordState = viewModel::setForgotPasswordState
                         )
                     }
 
